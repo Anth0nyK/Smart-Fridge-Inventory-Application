@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Login.qml</file>
+        <file>images/bulb.png</file>
+        <file>images/phone.png</file>
+    </qresource>
+</RCC>
