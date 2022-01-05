@@ -12,20 +12,13 @@ import QtQuick.Controls 2.3
 Window {
     id: mainscreen
     visible: true
-    //width: 840
-    width: 1040
-    maximumWidth: 1040
-    minimumWidth: 1040
-
+    width: 840
     height: 680
-    maximumHeight: 680
-    minimumHeight: 680
 
     property string currentUserName
     property string currentUserID
-    property bool forRestaurant: true
 
-    /*
+
     TextField {
         visible: false
         id: hostname
@@ -37,7 +30,7 @@ Window {
         id: portname
         text: "1883"
     }
-*/
+
 
     Rectangle {
         id: root
@@ -47,9 +40,7 @@ Window {
 
     Rectangle {
         id: userArea
-        color: "#eeeeee"
-        border.color: "#bababa"
-        border.width: 2
+        color: "#d3d3d3"
         width: parent.width*0.25
         height: parent.height/7
         anchors.bottom: root.bottom
@@ -60,8 +51,8 @@ Window {
             anchors.centerIn: userArea
             width: parent.width * 0.8
             height: parent.height * 0.8
-            color: "#eeeeee"
-            /*
+            color: "light grey"
+
             Image {
                 id: image
                 anchors.top: rectangle.top
@@ -73,11 +64,11 @@ Window {
                 source: ""
                 fillMode: Image.PreserveAspectFit
             }
-*/
+
             Text {
                 id: loggedInAs
                 //text: "User: " + profilehelper.getUsername(currentUserID)
-                text: qsTr("User")
+                text: "User"
                 anchors.left: image.right
                 anchors.verticalCenter: image.verticalCenter
                 font.pixelSize: 12
@@ -106,7 +97,6 @@ Window {
                 onClicked: {
                     thestackView.clear()
                     //thestackView.push("qrc:/editProfile.qml", { userID: currentUserID, userImage: profilehelper.getImage(currentUserID)})
-                    thestackView.push("qrc:/editProfile.qml")
                 }
             }
 
@@ -138,7 +128,7 @@ Window {
             anchors.fill: parent
             Label {
                 id: toplabel
-                //text: qsTr("Contacts")
+                text: qsTr("Contacts")
                 font.pixelSize: 15
                 font.bold: true
                 anchors.centerIn: parent
@@ -149,8 +139,6 @@ Window {
     Rectangle {
         id: contactareaview
         color: "white"
-        border.color: "#d8d8d8"
-        border.width: 2
         height: contactarea.height*0.9
         width: contactarea.width
         anchors.bottom: contactarea.bottom
@@ -158,89 +146,63 @@ Window {
 
 
 
-    ListView {
-        objectName: "testlistview"
-        clip: true
-        id: thelistView
-        anchors.fill: parent
-        anchors.bottomMargin: 8
-        anchors.topMargin: 8
-        anchors.leftMargin: 8
-        anchors.rightMargin: 8
-        spacing: 20
+/*
+        ListView {
+            objectName: "testlistview"
+            clip: true
+            id: thelistView
+            anchors.fill: parent
+            spacing: 20
 
-        delegate: ItemDelegate {
-            onClicked: {
-                    thestackView.clear()
-                    //thestackView.push("qrc:/chat2.qml", { chatroomHeader: model.GPName, topicID: model.TopicID, senderID: currentUserID})
-            }
-
-            x: 10
-            width: parent.width
-            height: contactareaview.height / 8
-
-            Row {
-                id: row2
-
-                anchors.verticalCenter: parent.verticalCenter
-
-
-                Rectangle {
-                    width: 60
-                    //height: width
-                    height: 100
-                    //color: "white"
-                    //color: model.colorCode
-
-                    Image {
-                        id: listImage
-                        width: parent.width
-                        height: parent.height
-                        //source: loadCT ? model.Image : model.Picture
-                        source: model.icon
-                        fillMode: Image.PreserveAspectFit
+            delegate: ItemDelegate {
+                onClicked: {
+                    if(loadCT == true){
+                        thestackView.clear()
+                        thestackView.push("qrc:/chat.qml", { chatroomHeader: model.UserName, topicID: model.TopicID, senderID: currentUserID})
+                    }
+                    else{
+                        thestackView.clear()
+                        thestackView.push("qrc:/chat2.qml", { chatroomHeader: model.GPName, topicID: model.TopicID, senderID: currentUserID})
                     }
                 }
 
+                x: 10
+                width: parent.width
+                height: contactareaview.height / 8
 
-                Text {
-                    //text: loadCT ? model.UserName : model.GPName
-                    text: model.name
+                Row {
+                    id: row2
+
                     anchors.verticalCenter: parent.verticalCenter
-                    font.bold: true
+
+
+                    Rectangle {
+                        width: 60
+                        height: width
+                        color: "white"
+
+                        Image {
+                            id: listImage
+                            width: parent.width
+                            height: parent.height
+                            source: loadCT ? model.Image : model.Picture
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+
+
+                    Text {
+                        text: loadCT ? model.UserName : model.GPName
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.bold: true
+                    }
+                    spacing: 10
                 }
-                spacing: 10
             }
+            model: loadCT ? thetestContactmodel : thetestContactmodel2
         }
-        model: ListModel {
-                ListElement {
-                    name: "Fridge"
-                    icon: "images/fridge.png"
-                }
 
-                ListElement {
-                    name: "Orders"
-                    icon: "images/orders.png"
-                }
-
-                ListElement {
-                    name: "History"
-                    icon: "images/history.png"
-                }
-
-                ListElement {
-                    name: "Notifications"
-                    icon: "images/bell.png"
-                }
-                ListElement{
-                    name: "Management"
-                    icon: "images/people.png"
-                }
-            }
-
-    }
-
-
+*/
 
 
     }
@@ -256,70 +218,11 @@ Window {
 
     Rectangle{
         id: chatareaview
-        color: "#fefefe"
+        color: "grey"
         width: chatarea.width
         height: chatarea.height
         anchors.top: chatarea.top
         anchors.left: chatarea.left
-
-
-
-
-        Text {
-            id: text1
-            x: 164
-            y: 247
-            width: 453
-            height: 107
-            text: qsTr("Smart Fridge")
-            font.pixelSize: 80
-            font.bold: false
-        }
-
-        Text {
-            id: text2
-            x: 623
-            y: 247
-            text: qsTr("TM")
-            font.pixelSize: 30
-            font.bold: true
-        }
-
-        Text {
-            id: text3
-            x: 519
-            y: 360
-            text: qsTr("By Future Fridges")
-            font.pixelSize: 20
-        }
-
-        Text {
-            id: text4
-            x: 658
-            y: 649
-            text: qsTr("+44 1234 123456")
-            font.pixelSize: 15
-        }
-
-        Image {
-            id: image
-            x: 623
-            y: 644
-            width: 30
-            height: 30
-            source: "images/phone.png"
-            fillMode: Image.PreserveAspectFit
-        }
-
-        Image {
-            id: image1
-            x: 78
-            y: 261
-            width: 80
-            height: 80
-            source: "images/bulb.png"
-            fillMode: Image.PreserveAspectFit
-        }
 
         StackView {
             id: thestackView
@@ -340,17 +243,12 @@ Window {
         }
     }
 
-
-
 }
-
-
 
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.33}D{i:1}D{i:4}D{i:5}D{i:6}D{i:3}D{i:2}D{i:7}D{i:10}D{i:9}
-D{i:8}D{i:12}D{i:11}D{i:24}D{i:26}D{i:27}D{i:28}D{i:29}D{i:30}D{i:31}D{i:32}D{i:33}
-D{i:25}
+    D{i:0;formeditorZoom:0.75}D{i:1}D{i:2}D{i:3}D{i:6}D{i:7}D{i:8}D{i:9}D{i:5}D{i:4}D{i:10}
+D{i:13}D{i:12}D{i:11}D{i:14}D{i:15}D{i:17}D{i:18}D{i:16}
 }
 ##^##*/

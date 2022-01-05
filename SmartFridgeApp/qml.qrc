@@ -4,5 +4,11 @@
         <file>Login.qml</file>
         <file>images/bulb.png</file>
         <file>images/phone.png</file>
+        <file>images/fridge.png</file>
+        <file>images/orders.png</file>
+        <file>images/history.png</file>
+        <file>images/bell.png</file>
+        <file>images/people.png</file>
+        <file>editProfile.qml</file>
     </qresource>
 </RCC>

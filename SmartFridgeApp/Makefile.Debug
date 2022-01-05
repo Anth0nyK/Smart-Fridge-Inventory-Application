@@ -101,10 +101,16 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_qml.cpp
 debug/qrc_qml.cpp: qml.qrc \
 		../../../QtCreator/6.2.2/mingw_64/bin/rcc.exe \
+		editProfile.qml \
 		main.qml \
 		Login.qml \
+		images/bell.png \
+		images/history.png \
 		images/phone.png \
-		images/bulb.png
+		images/people.png \
+		images/orders.png \
+		images/bulb.png \
+		images/fridge.png
 	F:\QtCreator\6.2.2\mingw_64\bin\rcc.exe -name qml qml.qrc -o debug\qrc_qml.cpp
 
 compiler_moc_predefs_make_all: debug/moc_predefs.h
