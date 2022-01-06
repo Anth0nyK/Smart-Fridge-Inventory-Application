@@ -101,9 +101,10 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_qml.cpp
 debug/qrc_qml.cpp: qml.qrc \
 		../../../QtCreator/6.2.2/mingw_64/bin/rcc.exe \
-		editProfile.qml \
+		EditProfile.qml \
 		main.qml \
 		Login.qml \
+		FridgeInventory.qml \
 		images/bell.png \
 		images/history.png \
 		images/phone.png \

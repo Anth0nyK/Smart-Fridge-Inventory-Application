@@ -16,14 +16,19 @@ Window {
     width: 1040
     maximumWidth: 1040
     minimumWidth: 1040
-
-    height: 680
-    maximumHeight: 680
-    minimumHeight: 680
+    //680 height
+    height: 585
+    maximumHeight: 585
+    minimumHeight: 5
 
     property string currentUserName
     property string currentUserID
     property bool forRestaurant: true
+
+
+    EditProfile{
+        id: profilepage
+    }
 
     /*
     TextField {
@@ -76,8 +81,9 @@ Window {
 */
             Text {
                 id: loggedInAs
+
                 //text: "User: " + profilehelper.getUsername(currentUserID)
-                text: qsTr("User")
+                text: qsTr("User: " + currentUserID)
                 anchors.left: image.right
                 anchors.verticalCenter: image.verticalCenter
                 font.pixelSize: 12
@@ -106,7 +112,9 @@ Window {
                 onClicked: {
                     thestackView.clear()
                     //thestackView.push("qrc:/editProfile.qml", { userID: currentUserID, userImage: profilehelper.getImage(currentUserID)})
-                    thestackView.push("qrc:/editProfile.qml")
+
+                    thestackView.push(profilepage, {userID: "currentUserID"})
+                    //thestackView.push("qrc:/editProfile.qml")
                 }
             }
 
@@ -125,14 +133,15 @@ Window {
 
     Rectangle {
         id: contactareaheader
-        color: "grey"
+        color: "#eeeeee"
+        border.color: "#bababa"
         height: contactarea.height*0.1
         width: contactarea.width
         anchors.top: contactarea.top
         anchors.left: contactarea.left
 
 
-
+/*
         ToolBar {
             id: toolBar
             anchors.fill: parent
@@ -144,6 +153,8 @@ Window {
                 anchors.centerIn: parent
             }
         }
+        */
+
     }
 
     Rectangle {
@@ -172,6 +183,7 @@ Window {
         delegate: ItemDelegate {
             onClicked: {
                     thestackView.clear()
+                    thestackView.push(model.link)
                     //thestackView.push("qrc:/chat2.qml", { chatroomHeader: model.GPName, topicID: model.TopicID, senderID: currentUserID})
             }
 
@@ -188,14 +200,14 @@ Window {
                 Rectangle {
                     width: 60
                     //height: width
-                    height: 100
+                    height: 60
                     //color: "white"
                     //color: model.colorCode
 
                     Image {
                         id: listImage
-                        width: parent.width
-                        height: parent.height
+                        width: parent.width - 10
+                        height: parent.height - 10
                         //source: loadCT ? model.Image : model.Picture
                         source: model.icon
                         fillMode: Image.PreserveAspectFit
@@ -216,6 +228,7 @@ Window {
                 ListElement {
                     name: "Fridge"
                     icon: "images/fridge.png"
+                    link: "qrc:/FridgeInventory.qml"
                 }
 
                 ListElement {
@@ -323,15 +336,56 @@ Window {
 
         StackView {
             id: thestackView
+            //initialItem: stackView
             anchors.fill: parent
-        }
+
+            popEnter: Transition {
+                      PropertyAnimation{
+                          property: "opacity"
+                          from: 0
+                          to: 1
+                          duration: 1
+                      }
+                  }
+
+              popExit: Transition {
+                  PropertyAnimation{
+                      property: "opacity"
+                      from: 1
+                      to: 0
+                      duration: 1
+                  }
+              }
+
+              pushEnter: Transition {
+                        PropertyAnimation{
+                            property: "opacity"
+                            from: 0
+                            to: 1
+                            duration: 1
+                        }
+                    }
+
+              pushExit: Transition {
+                  PropertyAnimation{
+                      property: "opacity"
+                      from: 1
+                      to: 0
+                      duration: 1
+                  }
+              }
+            }
+
 
         RoundButton {
             anchors.right: parent.right
             //anchors.verticalCenter: parent.verticalCenter
             anchors.top: parent.top
+            anchors.topMargin: 8
+            anchors.rightMargin: 8
 
             id: roundButton
+            x: 740
             text: "X"
             font.bold: true
             onClicked: {
@@ -349,8 +403,7 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.33}D{i:1}D{i:4}D{i:5}D{i:6}D{i:3}D{i:2}D{i:7}D{i:10}D{i:9}
-D{i:8}D{i:12}D{i:11}D{i:24}D{i:26}D{i:27}D{i:28}D{i:29}D{i:30}D{i:31}D{i:32}D{i:33}
-D{i:25}
+    D{i:0;formeditorZoom:1.1}D{i:1}D{i:2}D{i:5}D{i:6}D{i:7}D{i:4}D{i:3}D{i:8}D{i:9}D{i:11}
+D{i:10}D{i:23}D{i:25}D{i:26}D{i:27}D{i:28}D{i:29}D{i:30}D{i:31}D{i:40}D{i:24}
 }
 ##^##*/

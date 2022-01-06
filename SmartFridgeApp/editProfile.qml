@@ -6,18 +6,35 @@ import QtQuick.Controls 2.3
 Page {
     property string userID
     property string userImage
+    property StackView theStack: StackView.view
+
     width: 780
-    height: 680
+    height: 585
 
     Rectangle {
 
         anchors.fill: parent
 
-        color: "#eeeeec"
+        color: "#ffffff"
         anchors.rightMargin: -1
         anchors.leftMargin: 1
         anchors.topMargin: 0
         //anchors.bottomMargin: -54
+
+
+        Rectangle {
+            id: rectangle
+            x: 0
+            y: 0
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            //width: 781
+            //height 58
+            height: 50
+            color: "#eeeeee"
+            border.color: "#bababa"
+        }
 
         Text {
             id: element
@@ -179,13 +196,39 @@ Page {
                 text:""
             }
 
-        }
+            Button {
+                id: backbutton
+                x: 8
+                y: 8
+                text: qsTr("back")
+                onClicked: {
+                    thestackView.pop()
+                }
+            }
+
+/*
+            Button {
+                id: button
+                x: 76
+                y: 101
+                text: qsTr("test")
+                onClicked:{
+                    thestackView.push("qrc:/EditProfile.qml", { userID: "currentUserID222"})
+                }
+            }
+
+*/
+
+    }
+
 
 }
 
+
+
 /*##^##
 Designer {
-    D{i:0;autoSize:true;formeditorZoom:0.5;height:480;width:640}D{i:2}D{i:3}D{i:4}D{i:6}
-D{i:7}D{i:8}D{i:9}D{i:10}D{i:11}D{i:13}D{i:14}D{i:15}D{i:17}D{i:18}D{i:1}
+    D{i:0;formeditorZoom:0.75}D{i:2}D{i:3}D{i:4}D{i:5}D{i:7}D{i:8}D{i:9}D{i:10}D{i:11}
+D{i:12}D{i:14}D{i:15}D{i:16}D{i:18}D{i:19}D{i:20}D{i:1}
 }
 ##^##*/

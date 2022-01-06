@@ -18,6 +18,8 @@ class login : public QObject
        Q_INVOKABLE QString loginToAccount(QString ID, QString PW){
            {
 
+            QString UserID = "";
+
             QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
             db.setHostName("localhost");
             db.setPort(3306);
@@ -27,11 +29,35 @@ class login : public QObject
 
             if(db.open())
             {
-                qDebug() << "Open";
+                qDebug() << "Connection is open";
             }
             else{
-                qDebug() << "Close";
+                qDebug() << "Connection is close";
             }
+
+            QSqlQuery query(db);
+
+            query.prepare("SELECT users.UserID FROM users WHERE users.UserID = ? AND users.UserPW = ?");
+            query.addBindValue(ID);
+            query.addBindValue(PW);
+
+
+            if (!query.exec()){
+                 qDebug("Login Action failed");
+            }
+
+
+            while (query.next()) {
+                  UserID = query.value(0).toString();
+                  qDebug() << "user id : " + UserID;
+            }
+
+
+            if (UserID == ""){
+                return "Account does not exist.";
+            }
+
+            return UserID;
 
 /*
            qDebug() << "ID in login: " + ID;

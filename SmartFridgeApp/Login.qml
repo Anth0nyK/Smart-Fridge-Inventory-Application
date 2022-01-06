@@ -30,7 +30,7 @@ Window {
 
         console.log("userID = " + userID)
 
-        if(userID == "error")
+        if(userID == "Account does not exist.")
         {
             pwField.text = ""
         }
@@ -62,6 +62,7 @@ Window {
             radius: 20
             color: "lightgrey"
 
+            /*
             TextField {
                 id: idField
                 //text: qsTr("101")
@@ -70,6 +71,18 @@ Window {
                 width: 180
                 height: 25
             }
+            */
+            /*
+            TextInput {
+                id: pwField
+                //text: qsTr("123")
+                echoMode: TextInput.Password
+                x: 144
+                y: 83
+                width: 180
+                height: 22
+            }
+*/
 
             Text {
                 id: userIDtext
@@ -99,14 +112,7 @@ Window {
             }
 
 
-            TextField {
-                id: pwField
-                //text: qsTr("123")
-                x: 144
-                y: 82
-                width: 180
-                height: 25
-            }
+
 
 
 
@@ -127,6 +133,47 @@ Window {
                 }
 
                 onClicked: {loginToAccount()}
+            }
+
+            Rectangle {
+                id: rectangle1
+                x: 144
+                y: 85
+                width: 180
+                height: 21
+                color: "#ffffff"
+
+                TextInput {
+                    id: pwField
+                    //text: qsTr("123")
+                    echoMode: TextInput.Password
+                    x: 8
+                    y: 1
+                    width: 164
+                    height: 20
+                    //text: qsTr("Text Input")
+                    font.pixelSize: 12
+                }
+
+            }
+
+            Rectangle {
+                id: rectangle2
+                x: 144
+                y: 36
+                width: 180
+                height: 21
+                color: "#ffffff"
+
+            TextInput {
+                id: idField
+                x: 8
+                y: 1
+                width: 164
+                height: 20
+                //text: qsTr("Text Input")
+                font.pixelSize: 12
+                }
             }
         }
 
@@ -165,10 +212,10 @@ Window {
 
         Image {
             id: image
-            x: 77
-            y: 121
-            width: 43
-            height: 55
+            x: 49
+            y: 102
+            width: 80
+            height: 75
             source: "images/bulb.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -199,7 +246,7 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.9}D{i:1}D{i:4}D{i:5}D{i:6}D{i:7}D{i:8}D{i:3}D{i:11}D{i:10}
-D{i:12}D{i:13}D{i:14}D{i:15}D{i:2}
+    D{i:0;formeditorZoom:1.33}D{i:1}D{i:4}D{i:5}D{i:6}D{i:9}D{i:8}D{i:11}D{i:10}D{i:3}
+D{i:13}D{i:12}D{i:14}D{i:15}D{i:16}D{i:17}D{i:2}
 }
 ##^##*/

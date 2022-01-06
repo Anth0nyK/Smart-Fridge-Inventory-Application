@@ -9,6 +9,7 @@
         <file>images/history.png</file>
         <file>images/bell.png</file>
         <file>images/people.png</file>
-        <file>editProfile.qml</file>
+        <file>EditProfile.qml</file>
+        <file>FridgeInventory.qml</file>
     </qresource>
 </RCC>
