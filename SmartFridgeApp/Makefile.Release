@@ -107,10 +107,12 @@ release/qrc_qml.cpp: qml.qrc \
 		FridgeInventory.qml \
 		images/bell.png \
 		images/history.png \
+		images/lock.png \
 		images/phone.png \
 		images/people.png \
 		images/orders.png \
 		images/bulb.png \
+		images/mail.png \
 		images/fridge.png
 	F:\QtCreator\6.2.2\mingw_64\bin\rcc.exe -name qml qml.qrc -o release\qrc_qml.cpp
 

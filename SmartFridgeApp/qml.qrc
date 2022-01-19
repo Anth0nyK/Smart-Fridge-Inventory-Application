@@ -9,6 +9,8 @@
         <file>images/history.png</file>
         <file>images/bell.png</file>
         <file>images/people.png</file>
+		<file>images/mail.png</file>
+		<file>images/lock.png</file>
         <file>EditProfile.qml</file>
         <file>FridgeInventory.qml</file>
     </qresource>

@@ -135,7 +135,7 @@ Window {
         id: contactareaheader
         color: "#eeeeee"
         border.color: "#bababa"
-        height: contactarea.height*0.1
+        height: contactarea.height*0.15
         width: contactarea.width
         anchors.top: contactarea.top
         anchors.left: contactarea.left
@@ -162,7 +162,7 @@ Window {
         color: "white"
         border.color: "#d8d8d8"
         border.width: 2
-        height: contactarea.height*0.9
+        height: contactarea.height*0.85
         width: contactarea.width
         anchors.bottom: contactarea.bottom
         anchors.left: contactarea.left
@@ -381,11 +381,11 @@ Window {
             anchors.right: parent.right
             //anchors.verticalCenter: parent.verticalCenter
             anchors.top: parent.top
-            anchors.topMargin: 8
+            anchors.topMargin: 18
             anchors.rightMargin: 8
 
             id: roundButton
-            x: 740
+            x: 840
             text: "X"
             font.bold: true
             onClicked: {
@@ -401,9 +401,11 @@ Window {
 
 
 
+
+
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.1}D{i:1}D{i:2}D{i:5}D{i:6}D{i:7}D{i:4}D{i:3}D{i:8}D{i:9}D{i:11}
+    D{i:0;formeditorZoom:0.75}D{i:1}D{i:2}D{i:5}D{i:6}D{i:7}D{i:4}D{i:3}D{i:8}D{i:9}D{i:11}
 D{i:10}D{i:23}D{i:25}D{i:26}D{i:27}D{i:28}D{i:29}D{i:30}D{i:31}D{i:40}D{i:24}
 }
 ##^##*/
