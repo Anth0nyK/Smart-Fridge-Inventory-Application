@@ -37,7 +37,7 @@ class login : public QObject
 
             QSqlQuery query(db);
 
-            query.prepare("SELECT users.UserID FROM users WHERE users.UserID = ? AND users.UserPW = ?");
+            query.prepare("SELECT user.UserID FROM user WHERE user.UserID = ? AND user.UserPW = ?");
             query.addBindValue(ID);
             query.addBindValue(PW);
 

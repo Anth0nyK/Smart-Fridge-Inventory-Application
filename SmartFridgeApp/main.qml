@@ -7,7 +7,7 @@ import QtQuick.Controls 2.3
 //import backend 1.0
 //import sendMessage 1.0
 //import urlhelper 1.0
-//import profileinfo 1.0
+import profileinfo 1.0
 
 Window {
     id: mainscreen
@@ -19,15 +19,24 @@ Window {
     //680 height
     height: 585
     maximumHeight: 585
-    minimumHeight: 5
+    minimumHeight: 585
 
     property string currentUserName
     property string currentUserID
-    property bool forRestaurant: true
+    property string fridgeID
+    property int accountType
+    //property bool forRestaurant: true
 
+    FridgeInventory{
+        id: fridgeInvScreen
+    }
 
     EditProfile{
         id: profilepage
+    }
+
+    ProfileHelper{
+        id: profilehelper
     }
 
     /*
@@ -66,7 +75,7 @@ Window {
             width: parent.width * 0.8
             height: parent.height * 0.8
             color: "#eeeeee"
-            /*
+
             Image {
                 id: image
                 anchors.top: rectangle.top
@@ -74,16 +83,16 @@ Window {
 
                 width: parent.height*0.5
                 height: parent.height*0.5
-                //source: profilehelper.getImage(currentUserID)
-                source: ""
+                source: profilehelper.getImage(currentUserID)
+                //source: ""
                 fillMode: Image.PreserveAspectFit
             }
-*/
+
             Text {
                 id: loggedInAs
 
                 //text: "User: " + profilehelper.getUsername(currentUserID)
-                text: qsTr("User: " + currentUserID)
+                text: qsTr("User: " + currentUserName)
                 anchors.left: image.right
                 anchors.verticalCenter: image.verticalCenter
                 font.pixelSize: 12
@@ -183,7 +192,7 @@ Window {
         delegate: ItemDelegate {
             onClicked: {
                     thestackView.clear()
-                    thestackView.push(model.link)
+                    thestackView.push(model.link , {currentfridgeID: fridgeID})
                     //thestackView.push("qrc:/chat2.qml", { chatroomHeader: model.GPName, topicID: model.TopicID, senderID: currentUserID})
             }
 
@@ -229,6 +238,7 @@ Window {
                     name: "Fridge"
                     icon: "images/fridge.png"
                     link: "qrc:/FridgeInventory.qml"
+                    //link: fridgeInvScreen
                 }
 
                 ListElement {
@@ -308,16 +318,16 @@ Window {
 
         Text {
             id: text4
-            x: 658
-            y: 649
+            x: 657
+            y: 552
             text: qsTr("+44 1234 123456")
             font.pixelSize: 15
         }
 
         Image {
-            id: image
-            x: 623
-            y: 644
+            id: phoneimage
+            x: 622
+            y: 547
             width: 30
             height: 30
             source: "images/phone.png"
@@ -405,7 +415,7 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.75}D{i:1}D{i:2}D{i:5}D{i:6}D{i:7}D{i:4}D{i:3}D{i:8}D{i:9}D{i:11}
-D{i:10}D{i:23}D{i:25}D{i:26}D{i:27}D{i:28}D{i:29}D{i:30}D{i:31}D{i:40}D{i:24}
+    D{i:0;formeditorZoom:1.66}D{i:1}D{i:2}D{i:3}D{i:5}D{i:4}D{i:10}D{i:11}D{i:13}D{i:12}
+D{i:25}D{i:27}D{i:28}D{i:29}D{i:30}D{i:31}D{i:32}D{i:33}D{i:42}D{i:26}
 }
 ##^##*/

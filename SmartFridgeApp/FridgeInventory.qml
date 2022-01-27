@@ -2,13 +2,24 @@ import QtQuick 2.4
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 
+import inventorymodel 1.0
 
 Page {
     property string userID
     property string userImage
-
+    property string currentfridgeID
+    //property StackView theStack: StackView.view
     width: 780
     height: 585
+
+    ItemScreen{
+        id: theItemScreen
+    }
+
+    NewItemScreen{
+        id: theNewItemScreen
+    }
+
 
     Rectangle {
         id: rectangle1
@@ -138,7 +149,9 @@ Page {
             cellHeight: 200
             delegate: ItemDelegate {
                 onClicked: {
-                        thestackView.clear()
+                        //console.info("model.itemID = " + model.itemID)
+                        thestackView.push(theItemScreen, {itemID: model.itemID, itemPic: model.itemPic})
+                        //thestackView.clear()
                         //thestackView.push("qrc:/chat2.qml", { chatroomHeader: model.GPName, topicID: model.TopicID, senderID: currentUserID})
                 }
                 x: 5
@@ -146,25 +159,39 @@ Page {
                 height: 200
                 Column {
 
-
+                    Image{
+                        id: itemImage
+                        width: 150
+                        height: 150
+                        source: model.itemPic
+                        fillMode: Image.PreserveAspectFit
+                    }
+                    /*
                     Rectangle {
                         width: 150
                         height: 150
-                        color: colorCode
+                        //color: colorCode
                         radius: 10
                         border.width: 1
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
-
+                    */
                     Text {
                         x: 5
-                        text: name
+                        //text: name
+                        //text: model.itemName
+                        text: qsTr(model.itemName + " x" +model.itemCount)
                         font.bold: true
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
 
                 }
             }
+            model: InventoryModel{
+                id: theinventorymodel;
+                fridgeID: currentfridgeID
+            }
+            /*
             model: ListModel {
                 ListElement {
                     name: "Grey"
@@ -216,7 +243,7 @@ Page {
                     colorCode: "green"
                 }
             }
-
+            */
             RoundButton {
                 id: roundButton
                 x: 680
@@ -233,6 +260,9 @@ Page {
                 background: Rectangle {
                     radius: roundButton.radius
                     color: "#43b05c"
+                }
+                onClicked: {
+                    thestackView.push(theNewItemScreen, {fridgeID: currentfridgeID})
                 }
             }
 

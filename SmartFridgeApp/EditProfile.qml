@@ -31,7 +31,7 @@ Page {
             anchors.right: parent.right
             //width: 781
             //height 58
-            height: 50
+            height: 75
             color: "#eeeeee"
             border.color: "#bababa"
         }
@@ -85,8 +85,8 @@ Page {
 
             Text {
                 id: element2
-                x: 253
-                y: 66
+                x: 294
+                y: 113
                 text: qsTr("Your Profile")
                 font.pixelSize: 25
             }
@@ -199,7 +199,7 @@ Page {
             Button {
                 id: backbutton
                 x: 8
-                y: 8
+                y: 25
                 text: qsTr("back")
                 onClicked: {
                     thestackView.pop()

@@ -1,0 +1,10 @@
+debug/inventorymodel.o
+debug/itemmodel.o
+debug/main.o
+debug/qrc_qml.o
+debug/moc_inventorymodel.o
+debug/moc_iteminfo.o
+debug/moc_itemmodel.o
+debug/moc_login.o
+debug/moc_profileinfo.o
+debug/moc_tablemodel.o

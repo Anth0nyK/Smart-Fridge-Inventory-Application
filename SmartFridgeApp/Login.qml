@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 import login 1.0
+import profileinfo 1.0
 
 Window {
     width: 700
@@ -14,9 +15,15 @@ Window {
     id: loginscreen
 
     property string userID
+    property string fridgeID
+    property string username
 
     LoginClass {
         id: logintool
+    }
+
+    ProfileHelper{
+        id: profiletool
     }
 
     function addPin() {
@@ -36,8 +43,10 @@ Window {
         }
         else
         {
+            fridgeID = profiletool.getFridgeID(userID)
+            username = profiletool.getUsername(userID)
             var component = Qt.createComponent("main.qml");
-            var win = component.createObject(loginscreen,{currentUserID: userID});
+            var win = component.createObject(loginscreen,{currentUserID: userID,currentUserName: username, fridgeID: fridgeID});
             win.show();
             loginscreen.hide();
         }
