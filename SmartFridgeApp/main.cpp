@@ -6,6 +6,7 @@
 #include <iteminfo.h>
 //#include <tablemodel.h>
 #include <itemmodel.h>
+#include <fridgeHandler.h>
 
 int main(int argc, char *argv[])
 {
@@ -19,7 +20,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<profileinfo>("profileinfo",1,0,"ProfileHelper");
     qmlRegisterType<iteminfo>("iteminfo",1,0,"ItemHelper");
     qmlRegisterType<itemModel>("itemmodel",1,0,"ItemModel");
-
+    qmlRegisterType<fridgeHandler>("fridgeHandler",1,0,"FridgeHandler");
     //qmlRegisterType<TableModel>("tablemodel",1,0,"TableModel");
 
     QQmlApplicationEngine engine;

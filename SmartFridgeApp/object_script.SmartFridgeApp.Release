@@ -2,9 +2,9 @@ release/inventorymodel.o
 release/itemmodel.o
 release/main.o
 release/qrc_qml.o
+release/moc_fridgeHandler.o
 release/moc_inventorymodel.o
 release/moc_iteminfo.o
 release/moc_itemmodel.o
 release/moc_login.o
 release/moc_profileinfo.o
-release/moc_tablemodel.o

@@ -12,10 +12,20 @@
         <file>images/mail.png</file>
         <file>images/lock.png</file>
         <file>images/setting.png</file>
+        <file>images/lockBig.png</file>
+        <file>images/lockedBig.png</file>
         <file>EditProfile.qml</file>
         <file>FridgeInventory.qml</file>
         <file>ItemScreen.qml</file>
         <file>ItemSettings.qml</file>
         <file>NewItemScreen.qml</file>
+        <file>OpenDoorScreen.qml</file>
+        <file>images/putIn.png</file>
+        <file>images/takeOut.png</file>
+        <file>UnlockedScreen.qml</file>
+        <file>InsertItemInfoScreen.qml</file>
+        <file>InsertItemScreen.qml</file>
+        <file>TakeItemScreen.qml</file>
+        <file>TakeItemInfoScreen.qml</file>
     </qresource>
 </RCC>

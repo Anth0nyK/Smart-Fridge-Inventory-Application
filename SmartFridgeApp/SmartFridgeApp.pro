@@ -23,6 +23,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    fridgeHandler.h \
     inventorymodel.h \
     iteminfo.h \
     itemmodel.h \

@@ -20,6 +20,10 @@ Page {
         id: theNewItemScreen
     }
 
+    OpenDoorScreen{
+        id: theoOpenDoorScreen
+    }
+
 
     Rectangle {
         id: rectangle1
@@ -122,7 +126,8 @@ Page {
                     anchors.leftMargin: 0
                     anchors.topMargin: 0
                     onClicked: {
-                        console.info("image clicked!3")
+                        //console.info("image clicked!3")
+                        thestackView.push(theoOpenDoorScreen, {fridgeID: currentfridgeID, userID: currentUserID})
                     }
                 }
                 Text {

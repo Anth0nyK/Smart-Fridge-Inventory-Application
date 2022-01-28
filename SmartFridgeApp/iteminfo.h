@@ -7,6 +7,13 @@
 #include <string>
 #include <QDebug>
 
+#include <iomanip>
+#include <ctime>
+#include <sstream>
+#include <mutex>          // std::mutex
+
+//std::mutex dbmtx;
+
 class iteminfo : public QObject
 {
     Q_OBJECT
@@ -296,6 +303,8 @@ public:
         }
     }
 
+
+
     //Create a new item
     //INSERT INTO `sf`.`inventory` (`itemName`, `fridgeID`, `itemCount`, `alertWhen`, `reorderWhen`) VALUES ('a', '1', '1', '1', '1');
     Q_INVOKABLE void addItem(QString itemName, QString fridgeID , QString alertWhen, QString reorderWhen, QString supplierName, QString supplierEmail, QString itemPic){
@@ -330,6 +339,115 @@ public:
 
 
         }
+        }
+
+        bool is_number(const std::string &s) {
+          return !s.empty() && std::all_of(s.begin(), s.end(), ::isdigit);
+        }
+
+        //insert a item
+        Q_INVOKABLE void insertItem(QString itemID, QString fridgeID, QString amount, QString expiryDate){
+            {
+            QSqlDatabase::removeDatabase("connectionpi5");
+            QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL","connectionpi5");
+
+            bool isNumber = is_number(amount.toStdString());
+            if(isNumber){
+                QString insertDate;
+                //QString expiryDate;
+
+                auto t = std::time(nullptr);
+                auto tm = *std::localtime(&t);
+
+                std::ostringstream oss;
+                oss << std::put_time(&tm,"%Y-%m-%d");
+                auto str = oss.str();
+
+                insertDate = QString::fromStdString(str);
+                //expiryDate = insertDate;
+
+
+                //qDebug() << QString::fromStdString(str);
+
+                db.setHostName("localhost");
+                db.setPort(3306);
+                db.setUserName("root");
+                db.setPassword("admin");
+                db.setDatabaseName("sf");
+                db.open();
+
+                QSqlQuery query(db);
+
+                /*
+                int itemCount;
+
+                query.prepare("SELECT itemCount FROM inventory WHERE itemID = ?");
+                query.addBindValue(itemID);
+                if (!query.exec()){
+                     qDebug("get item count Action failed");
+                }
+
+                while (query.next()) {
+                      itemCount = query.value(0).toInt();
+                }
+
+                if(amount.toInt() > itemCount){
+
+                }
+                else{
+
+                }
+                */
+
+
+
+                for (int i = 0; i < amount.toInt(); i++) {
+                    //dbmtx.lock();
+
+                    query.prepare("INSERT INTO itemdata (itemID, fridgeID, insertDate, expiryDate) VALUES (?,?,?,?)");
+                    query.addBindValue(itemID);
+                    query.addBindValue(fridgeID);
+                    query.addBindValue(insertDate);
+                    query.addBindValue(expiryDate);
+
+                    if (!query.exec()){
+                         qDebug("insert item info Action failed");
+                    }
+
+                    //dbmtx.unlock();
+                }
+
+                query.prepare("UPDATE inventory SET itemCount = itemCount + ? WHERE itemID = ?");
+                query.addBindValue(amount);
+                query.addBindValue(itemID);
+
+                if (!query.exec()){
+                     qDebug("item count increment Action failed");
+                }
+
+                }
+            }
+
+        }
+
+
+
+    Q_INVOKABLE QString gettodayDate(){
+        {
+
+        auto t = std::time(nullptr);
+        auto tm = *std::localtime(&t);
+
+        std::ostringstream oss;
+        oss << std::put_time(&tm,"%Y-%m-%d");
+        auto str = oss.str();
+
+        return QString::fromStdString(str);
+
+        }
     }
+
+
+
 };
 #endif // ITEMINFO_H
