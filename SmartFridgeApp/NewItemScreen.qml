@@ -199,7 +199,13 @@ Page {
             width: 83
             height: 26
             text: qsTr("Add")
-            enabled: true
+            enabled: {
+                itemnameField.length > 0;
+                supplierField.length > 0;
+                alertField.length > 0;
+                reorderField.length > 0;
+                emailField.length > 0;
+            }
             hoverEnabled: false
             background: Rectangle {
                 color: "#43b05c"
@@ -207,6 +213,7 @@ Page {
             }
             flat: false
             font.bold: true
+
             onClicked: {
                 createItem()
             }
@@ -241,6 +248,7 @@ Page {
             y: 539
             width: 257
             height: 28
+            horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 21
             font.bold: false
         }

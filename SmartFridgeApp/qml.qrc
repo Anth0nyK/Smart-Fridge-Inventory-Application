@@ -27,5 +27,7 @@
         <file>InsertItemScreen.qml</file>
         <file>TakeItemScreen.qml</file>
         <file>TakeItemInfoScreen.qml</file>
+        <file>Orders.qml</file>
+        <file>NewOrderScreen.qml</file>
     </qresource>
 </RCC>

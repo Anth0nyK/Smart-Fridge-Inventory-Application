@@ -128,11 +128,15 @@ Page {
             width: 100
             height: 26
             text: qsTr("CONFIRM")
-            enabled: true
+
             hoverEnabled: false
             background: Rectangle {
                 color: "#43b05c"
                 //radius: roundButton.radius
+            }
+            enabled: {
+                amountInput.length > 0;
+                expiryInput.length > 0;
             }
             flat: false
             font.bold: true
@@ -150,6 +154,7 @@ Page {
             y: 553
             width: 257
             height: 28
+            horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 21
             font.bold: false
         }

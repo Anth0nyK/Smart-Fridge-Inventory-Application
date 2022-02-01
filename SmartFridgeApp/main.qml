@@ -39,6 +39,7 @@ Window {
         id: profilehelper
     }
 
+
     /*
     TextField {
         visible: false
@@ -244,6 +245,7 @@ Window {
                 ListElement {
                     name: "Orders"
                     icon: "images/orders.png"
+                    link: "qrc:/Orders.qml"
                 }
 
                 ListElement {

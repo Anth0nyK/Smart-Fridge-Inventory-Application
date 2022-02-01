@@ -9,6 +9,8 @@ Page {
     property string userImage
     property string currentfridgeID
     //property StackView theStack: StackView.view
+    property int counter
+
     width: 780
     height: 585
 
@@ -23,6 +25,25 @@ Page {
     OpenDoorScreen{
         id: theoOpenDoorScreen
     }
+
+    function testing(){
+        text3.text = gridView.getDelegateInstanceAt(1).itemName
+    }
+
+    function countItems(){
+        counter = 0
+
+        while(true){
+            if(gridView.getDelegateInstanceAt(counter) != undefined){
+                counter = counter + 1
+            }
+            else{
+                break
+            }
+        }
+        text3.text = counter
+    }
+
 
 
     Rectangle {
@@ -108,6 +129,7 @@ Page {
                     text: qsTr("Permissions")
                     font.pixelSize: 12
                 }
+
             }
 
             Image {
@@ -138,6 +160,25 @@ Page {
                     font.pixelSize: 12
                 }
             }
+
+            Text {
+                id: text3
+                x: 25
+                y: 61
+                text: ""
+                font.pixelSize: 25
+            }
+
+            Button {
+                id: button
+                x: 368
+                y: 26
+                text: qsTr("test")
+                onClicked: {
+                          //testing()
+                        countItems()
+                      }
+            }
         }
 
         GridView {
@@ -153,6 +194,9 @@ Page {
             cellWidth: 185
             cellHeight: 200
             delegate: ItemDelegate {
+                objectName: "summaryDelegate"
+                property int index: model.index
+                property string itemName: amountInput.text
                 onClicked: {
                         //console.info("model.itemID = " + model.itemID)
                         thestackView.push(theItemScreen, {itemID: model.itemID, itemPic: model.itemPic})
@@ -183,12 +227,33 @@ Page {
                     */
                     Text {
                         x: 5
+                        id: itemText
                         //text: name
                         //text: model.itemName
-                        text: qsTr(model.itemName + " x" +model.itemCount)
+                        text: qsTr(model.itemName + " x" +model.itemCount + "asd: " + itemName )
                         font.bold: true
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
+                    Rectangle {
+                        id: rectangle2
+                        x: 0
+                        y: 375
+                        width: 162
+                        height: 34
+                        color: "#ffffff"
+                        radius: 5
+                        border.width: 2
+
+                        TextInput{
+                            id: amountInput
+                            x: 8
+                            y: 8
+                            width: 146
+                            height: 20
+                            font.pixelSize: 12
+                        }
+                    }
+
 
                 }
             }
@@ -196,59 +261,7 @@ Page {
                 id: theinventorymodel;
                 fridgeID: currentfridgeID
             }
-            /*
-            model: ListModel {
-                ListElement {
-                    name: "Grey"
-                    colorCode: "grey"
-                }
 
-                ListElement {
-                    name: "Red"
-                    colorCode: "red"
-                }
-
-                ListElement {
-                    name: "Blue"
-                    colorCode: "blue"
-                }
-
-                ListElement {
-                    name: "Green"
-                    colorCode: "green"
-                }
-
-                ListElement {
-                    name: "Green"
-                    colorCode: "green"
-                }
-
-                ListElement {
-                    name: "Green"
-                    colorCode: "green"
-                }
-
-                ListElement {
-                    name: "Green"
-                    colorCode: "green"
-                }
-
-                ListElement {
-                    name: "Green"
-                    colorCode: "green"
-                }
-
-                ListElement {
-                    name: "Green"
-                    colorCode: "green"
-                }
-
-                ListElement {
-                    name: "Green"
-                    colorCode: "green"
-                }
-            }
-            */
             RoundButton {
                 id: roundButton
                 x: 680
@@ -283,6 +296,17 @@ Page {
                 font.bold: true
             }
 
+            function getDelegateInstanceAt(index) {
+                for(var i = 0; i < contentItem.children.length; ++i) {
+                    var item = contentItem.children[i];
+                    // We have to check for the specific objectName we gave our
+                    // delegates above, since we also get some items that are not
+                    // our delegates here.
+                    if (item.objectName == "summaryDelegate" && item.index == index)
+                        return item;
+                }
+                return undefined;
+            }
         }
 
 
@@ -325,7 +349,7 @@ Page {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.75}D{i:3}D{i:5}D{i:6}D{i:4}D{i:8}D{i:9}D{i:7}D{i:11}D{i:12}
-D{i:10}D{i:2}D{i:29}D{i:31}D{i:13}D{i:1}
+    D{i:0;formeditorZoom:0.75}D{i:1}D{i:2}D{i:3}D{i:6}D{i:8}D{i:9}D{i:7}D{i:11}D{i:12}
+D{i:10}D{i:14}D{i:15}D{i:13}D{i:16}D{i:17}D{i:5}D{i:26}D{i:28}D{i:18}D{i:4}
 }
 ##^##*/

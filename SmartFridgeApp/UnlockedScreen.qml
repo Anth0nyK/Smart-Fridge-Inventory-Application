@@ -13,6 +13,9 @@ Page {
         id: theInsertItemScreen
     }
 
+    TakeItemScreen{
+        id: theTakeItemScreen
+    }
 
     Rectangle {
 
@@ -70,6 +73,7 @@ Page {
             y: 539
             width: 257
             height: 28
+            horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 21
             font.bold: false
         }
@@ -91,6 +95,7 @@ Page {
                 anchors.topMargin: 0
                 onClicked: {
                     //console.info("image clicked!3")
+                    thestackView.push(theTakeItemScreen, {currentfridgeID: fridgeID, userID: userID})
                 }
             }
         }

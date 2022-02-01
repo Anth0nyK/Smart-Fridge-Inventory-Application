@@ -8,6 +8,8 @@ Page {
     property string itemID
     property string itemPic
     property string currentfridgeID
+
+    property string status
     //property StackView theStack: StackView.view
     width: 780
     height: 585
@@ -16,9 +18,19 @@ Page {
         id: itemtool
     }
 
-    function insertItem(){
-        if(amountInput.text != "" && expiryInput.text != ""){
-            itemtool.insertItem(itemID, currentfridgeID, amountInput.text, expiryInput.text)
+
+    function takeItem(){
+        if(amountInput.text != ""){
+            status = itemtool.takeItem(itemID, amountInput.text)
+            if(status == "error"){
+                message.text = "Invalid input"
+                amountInput.text = ""
+                }
+            if(status == "tooLarge"){
+                message.text = "Amount is larger than the quantity"
+                amountInput.text = ""
+            }
+
         }
     }
 
@@ -58,7 +70,8 @@ Page {
                 message.text = ""
                 thestackView.pop()
                 theinventorymodel.updateinventoryModel()
-                theinventorymodel2.updateinventoryModel()
+                theinventorymodel3.updateinventoryModel()
+                //theinventorymodel2.updateinventoryModel()
             }
         }
 
@@ -108,16 +121,19 @@ Page {
             width: 100
             height: 26
             text: qsTr("CONFIRM")
-            enabled: true
+
             hoverEnabled: false
             background: Rectangle {
                 color: "#43b05c"
                 //radius: roundButton.radius
             }
+            enabled: {
+                amountInput.length > 0;
+            }
             flat: false
             font.bold: true
             onClicked: {
-                insertItem()
+                takeItem()
             }
         }
 
@@ -131,6 +147,7 @@ Page {
             width: 257
             height: 28
             font.pixelSize: 21
+            horizontalAlignment: Text.AlignHCenter
             font.bold: false
         }
 

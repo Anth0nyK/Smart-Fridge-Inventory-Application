@@ -87,6 +87,7 @@ Page {
             y: 539
             width: 257
             height: 28
+            horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 21
             font.bold: false
         }

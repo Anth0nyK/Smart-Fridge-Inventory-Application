@@ -7,7 +7,9 @@ QT += sql
 SOURCES += \
         inventorymodel.cpp \
         itemmodel.cpp \
-        main.cpp
+        main.cpp \
+        ordermodel.cpp \
+        suppliermodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -25,7 +27,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     fridgeHandler.h \
     inventorymodel.h \
-    iteminfo.h \
+    itemHelper.h \
     itemmodel.h \
     login.h \
-    profileinfo.h
+    orderHelper.h \
+    ordermodel.h \
+    profileinfo.h \
+    suppliermodel.h
