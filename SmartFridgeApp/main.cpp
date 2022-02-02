@@ -10,6 +10,7 @@
 #include <orderHelper.h>
 #include <ordermodel.h>
 #include <suppliermodel.h>
+#include <orderitemsmodel.h>
 
 int main(int argc, char *argv[])
 {
@@ -27,7 +28,10 @@ int main(int argc, char *argv[])
     qmlRegisterType<orderHelper>("orderHelper",1,0,"OrderHelper");
     qmlRegisterType<orderModel>("ordermodel",1,0,"OrderModel");
     qmlRegisterType<supplierModel>("suppliermodel",1,0,"SupplierModel");
+    qmlRegisterType<orderitemsmodel>("orderitemsmodel",1,0,"OrderItemsModel");
+
     //qmlRegisterType<TableModel>("tablemodel",1,0,"TableModel");
+
 
     QQmlApplicationEngine engine;
 

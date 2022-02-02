@@ -1,6 +1,7 @@
 debug/inventorymodel.o
 debug/itemmodel.o
 debug/main.o
+debug/orderitemsmodel.o
 debug/ordermodel.o
 debug/suppliermodel.o
 debug/qrc_qml.o
@@ -10,6 +11,7 @@ debug/moc_itemHelper.o
 debug/moc_itemmodel.o
 debug/moc_login.o
 debug/moc_orderHelper.o
+debug/moc_orderitemsmodel.o
 debug/moc_ordermodel.o
 debug/moc_profileinfo.o
 debug/moc_suppliermodel.o

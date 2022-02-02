@@ -18,9 +18,10 @@ void orderModel::setorderID(const QString &thetopic)
 {
 
     //qDebug() << "In setTopic!!!!!!!!!!!!!!";
+    /*
     if (thetopic == m_orderID)
         return;
-
+*/
     m_orderID = thetopic;
 
 

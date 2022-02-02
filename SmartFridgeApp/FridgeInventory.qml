@@ -168,17 +168,6 @@ Page {
                 text: ""
                 font.pixelSize: 25
             }
-
-            Button {
-                id: button
-                x: 368
-                y: 26
-                text: qsTr("test")
-                onClicked: {
-                          //testing()
-                        countItems()
-                      }
-            }
         }
 
         GridView {
@@ -230,10 +219,11 @@ Page {
                         id: itemText
                         //text: name
                         //text: model.itemName
-                        text: qsTr(model.itemName + " x" +model.itemCount + "asd: " + itemName )
+                        text: qsTr(model.itemName + " x" +model.itemCount)
                         font.bold: true
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
+                    /*
                     Rectangle {
                         id: rectangle2
                         x: 0
@@ -253,7 +243,7 @@ Page {
                             font.pixelSize: 12
                         }
                     }
-
+*/
 
                 }
             }
@@ -350,6 +340,6 @@ Page {
 /*##^##
 Designer {
     D{i:0;formeditorZoom:0.75}D{i:1}D{i:2}D{i:3}D{i:6}D{i:8}D{i:9}D{i:7}D{i:11}D{i:12}
-D{i:10}D{i:14}D{i:15}D{i:13}D{i:16}D{i:17}D{i:5}D{i:26}D{i:28}D{i:18}D{i:4}
+D{i:10}D{i:14}D{i:15}D{i:13}D{i:16}D{i:5}D{i:23}D{i:25}D{i:17}D{i:4}
 }
 ##^##*/

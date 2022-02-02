@@ -29,5 +29,9 @@
         <file>TakeItemInfoScreen.qml</file>
         <file>Orders.qml</file>
         <file>NewOrderScreen.qml</file>
+        <file>NewOrderItemsScreen.qml</file>
+        <file>OrderConfirmScreen.qml</file>
+        <file>images/order.png</file>
+        <file>OrderDetail.qml</file>
     </qresource>
 </RCC>

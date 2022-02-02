@@ -1,6 +1,7 @@
 release/inventorymodel.o
 release/itemmodel.o
 release/main.o
+release/orderitemsmodel.o
 release/ordermodel.o
 release/suppliermodel.o
 release/qrc_qml.o
@@ -10,6 +11,7 @@ release/moc_itemHelper.o
 release/moc_itemmodel.o
 release/moc_login.o
 release/moc_orderHelper.o
+release/moc_orderitemsmodel.o
 release/moc_ordermodel.o
 release/moc_profileinfo.o
 release/moc_suppliermodel.o

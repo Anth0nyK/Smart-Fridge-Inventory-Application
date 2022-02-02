@@ -12,7 +12,17 @@ Page {
     width: 780
     height: 585
 
+    function update(){
+        thesuppliermodel.updatesupplierModel()
+    }
 
+    NewOrderItemsScreen{
+        id: theNewOrderItemsScreen
+    }
+
+    Component.onCompleted: {
+        update()
+    }
 
     Rectangle {
         id: rectangle1
@@ -55,6 +65,13 @@ Page {
                 font.pixelSize: 22
             }
 
+            Text {
+                id: text4
+                x: 257
+                y: 75
+                font.pixelSize: 25
+            }
+
         }
 
         GridView {
@@ -72,7 +89,7 @@ Page {
             delegate: ItemDelegate {
                 onClicked: {
                         //console.info("model.itemID = " + model.itemID)
-                        thestackView.push(theItemScreen, {itemID: model.itemID, itemPic: model.itemPic})
+                        thestackView.push(theNewOrderItemsScreen, {currentfridgeID: currentfridgeID, currentsupplierName: model.supplierName, currentsupplierEmail: model.supplierEmail})
                         //thestackView.clear()
                         //thestackView.push("qrc:/chat2.qml", { chatroomHeader: model.GPName, topicID: model.TopicID, senderID: currentUserID})
                 }
@@ -122,46 +139,23 @@ Page {
 
 
         }
-
-        RoundButton {
-            id: roundButton
-            x: 700
-            y: 485
-            width: 60
-            height: 60
-            text: "+"
-            checked: false
-            checkable: true
-            flat: true
-            highlighted: true
-            font.pointSize: 15
-            font.bold: true
-            background: Rectangle {
-                radius: roundButton.radius
-                color: "#43b05c"
-            }
-            onClicked: {
-                thestackView.push(theNewItemScreen, {fridgeID: currentfridgeID})
-            }
-        }
-
-        Text {
-            id: text2
-            x: 704
-            y: 545
-            width: 53
-            height: 17
-            color: "#43b05c"
-            text: qsTr("New item")
-            font.pixelSize: 12
-            font.bold: true
-        }
-
-
-
-
-
 /*
+        Button {
+            id: backbutton
+            x: 726
+            y: 81
+            text: qsTr("Back")
+            font.pointSize: 13
+            font.bold: true
+            onClicked: {
+                thestackView.pop()
+                thesuppliermodel.updatesupplierModel()
+            }
+        }
+
+
+
+
             Button {
                 id: backbutton
                 x: 8

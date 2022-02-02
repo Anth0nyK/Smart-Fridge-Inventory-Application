@@ -8,6 +8,7 @@ SOURCES += \
         inventorymodel.cpp \
         itemmodel.cpp \
         main.cpp \
+        orderitemsmodel.cpp \
         ordermodel.cpp \
         suppliermodel.cpp
 
@@ -31,6 +32,7 @@ HEADERS += \
     itemmodel.h \
     login.h \
     orderHelper.h \
+    orderitemsmodel.h \
     ordermodel.h \
     profileinfo.h \
     suppliermodel.h

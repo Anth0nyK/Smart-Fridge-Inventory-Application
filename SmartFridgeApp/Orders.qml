@@ -94,6 +94,7 @@ Page {
             }
         }
 
+        /*
         ListView {
             id: listView
             x: 12
@@ -101,11 +102,13 @@ Page {
             width: 756
             height: 375
             clip: true
-            delegate: Item {
+            delegate: ItemDelegate {
                 id: item1
                 x: 5
                 width: 80
                 height: 40
+
+
                 Row {
                     id: row1
                     z: 0
@@ -143,6 +146,64 @@ Page {
                 theorderID: currentfridgeID
 
             }
+
+        }
+*/
+
+        GridView {
+            id: gridView
+            x: 19
+            y: 156
+            width: 739
+            height: 410
+            model: ListModel {
+                ListElement {
+                    name: "Grey"
+                    colorCode: "grey"
+                }
+
+                ListElement {
+                    name: "Red"
+                    colorCode: "red"
+                }
+
+                ListElement {
+                    name: "Blue"
+                    colorCode: "blue"
+                }
+
+                ListElement {
+                    name: "Green"
+                    colorCode: "green"
+                }
+            }
+            cellWidth: 653
+            delegate: ItemDelegate {
+                x: 5
+                width: 650
+                height: 50
+                onClicked:{
+
+                }
+
+                Row {
+                    spacing: 5
+                    Rectangle {
+                        width: 653
+                        height: 40
+                        color: colorCode
+                        //anchors.horizontalCenter: parent.horizontalCenter
+                    }
+
+                    Text {
+                        x: 653
+                        text: name
+                        font.bold: true
+                        //anchors.horizontalCenter: parent.horizontalCenter
+                    }
+                }
+            }
+            cellHeight: 50
         }
 
 
@@ -165,6 +226,7 @@ Page {
             }
             onClicked: {
                 thestackView.push(theNewOrderScreen, {currentfridgeID: currentfridgeID})
+
             }
         }
 
