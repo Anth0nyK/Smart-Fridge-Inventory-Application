@@ -89,7 +89,7 @@ Page {
             delegate: ItemDelegate {
                 onClicked: {
                         //console.info("model.itemID = " + model.itemID)
-                        thestackView.push(theNewOrderItemsScreen, {currentfridgeID: currentfridgeID, currentsupplierName: model.supplierName, currentsupplierEmail: model.supplierEmail})
+                        thestackView.push(theNewOrderItemsScreen, {userID: userID, currentfridgeID: currentfridgeID, currentsupplierName: model.supplierName, currentsupplierEmail: model.supplierEmail})
                         //thestackView.clear()
                         //thestackView.push("qrc:/chat2.qml", { chatroomHeader: model.GPName, topicID: model.TopicID, senderID: currentUserID})
                 }

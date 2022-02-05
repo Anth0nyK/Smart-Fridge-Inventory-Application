@@ -22,41 +22,42 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_itemHelper_t {
-    const uint offsetsAndSize[50];
-    char stringdata0[271];
+    const uint offsetsAndSize[52];
+    char stringdata0[282];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_itemHelper_t, stringdata0) + ofs), len 
 static const qt_meta_stringdata_itemHelper_t qt_meta_stringdata_itemHelper = {
     {
 QT_MOC_LITERAL(0, 10), // "itemHelper"
-QT_MOC_LITERAL(11, 11), // "getItemname"
-QT_MOC_LITERAL(23, 0), // ""
-QT_MOC_LITERAL(24, 6), // "itemID"
-QT_MOC_LITERAL(31, 12), // "getItemCount"
-QT_MOC_LITERAL(44, 15), // "getSupplierName"
-QT_MOC_LITERAL(60, 16), // "getSupplierEmail"
-QT_MOC_LITERAL(77, 8), // "getAlert"
-QT_MOC_LITERAL(86, 10), // "getReorder"
-QT_MOC_LITERAL(97, 13), // "changePicture"
-QT_MOC_LITERAL(111, 10), // "newPicture"
-QT_MOC_LITERAL(122, 14), // "updateItemInfo"
-QT_MOC_LITERAL(137, 8), // "itemName"
-QT_MOC_LITERAL(146, 12), // "supplierName"
-QT_MOC_LITERAL(159, 9), // "alertWhen"
-QT_MOC_LITERAL(169, 11), // "reorderWhen"
-QT_MOC_LITERAL(181, 13), // "supplierEmail"
-QT_MOC_LITERAL(195, 7), // "addItem"
-QT_MOC_LITERAL(203, 8), // "fridgeID"
-QT_MOC_LITERAL(212, 7), // "itemPic"
-QT_MOC_LITERAL(220, 10), // "insertItem"
-QT_MOC_LITERAL(231, 6), // "amount"
-QT_MOC_LITERAL(238, 10), // "expiryDate"
-QT_MOC_LITERAL(249, 12), // "gettodayDate"
-QT_MOC_LITERAL(262, 8) // "takeItem"
+QT_MOC_LITERAL(11, 10), // "deleteTemp"
+QT_MOC_LITERAL(22, 0), // ""
+QT_MOC_LITERAL(23, 6), // "itemID"
+QT_MOC_LITERAL(30, 11), // "getItemname"
+QT_MOC_LITERAL(42, 12), // "getItemCount"
+QT_MOC_LITERAL(55, 15), // "getSupplierName"
+QT_MOC_LITERAL(71, 16), // "getSupplierEmail"
+QT_MOC_LITERAL(88, 8), // "getAlert"
+QT_MOC_LITERAL(97, 10), // "getReorder"
+QT_MOC_LITERAL(108, 13), // "changePicture"
+QT_MOC_LITERAL(122, 10), // "newPicture"
+QT_MOC_LITERAL(133, 14), // "updateItemInfo"
+QT_MOC_LITERAL(148, 8), // "itemName"
+QT_MOC_LITERAL(157, 12), // "supplierName"
+QT_MOC_LITERAL(170, 9), // "alertWhen"
+QT_MOC_LITERAL(180, 11), // "reorderWhen"
+QT_MOC_LITERAL(192, 13), // "supplierEmail"
+QT_MOC_LITERAL(206, 7), // "addItem"
+QT_MOC_LITERAL(214, 8), // "fridgeID"
+QT_MOC_LITERAL(223, 7), // "itemPic"
+QT_MOC_LITERAL(231, 10), // "insertItem"
+QT_MOC_LITERAL(242, 6), // "amount"
+QT_MOC_LITERAL(249, 10), // "expiryDate"
+QT_MOC_LITERAL(260, 12), // "gettodayDate"
+QT_MOC_LITERAL(273, 8) // "takeItem"
 
     },
-    "itemHelper\0getItemname\0\0itemID\0"
+    "itemHelper\0deleteTemp\0\0itemID\0getItemname\0"
     "getItemCount\0getSupplierName\0"
     "getSupplierEmail\0getAlert\0getReorder\0"
     "changePicture\0newPicture\0updateItemInfo\0"
@@ -73,7 +74,7 @@ static const uint qt_meta_data_itemHelper[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -81,32 +82,34 @@ static const uint qt_meta_data_itemHelper[] = {
        0,       // signalCount
 
  // methods: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   86,    2, 0x02,    1 /* Public */,
-       4,    1,   89,    2, 0x02,    3 /* Public */,
-       5,    1,   92,    2, 0x02,    5 /* Public */,
-       6,    1,   95,    2, 0x02,    7 /* Public */,
-       7,    1,   98,    2, 0x02,    9 /* Public */,
-       8,    1,  101,    2, 0x02,   11 /* Public */,
-       9,    2,  104,    2, 0x02,   13 /* Public */,
-      11,    6,  109,    2, 0x02,   16 /* Public */,
-      17,    7,  122,    2, 0x02,   23 /* Public */,
-      20,    4,  137,    2, 0x02,   31 /* Public */,
-      23,    0,  146,    2, 0x02,   36 /* Public */,
-      24,    2,  147,    2, 0x02,   37 /* Public */,
+       1,    1,   92,    2, 0x02,    1 /* Public */,
+       4,    1,   95,    2, 0x02,    3 /* Public */,
+       5,    1,   98,    2, 0x02,    5 /* Public */,
+       6,    1,  101,    2, 0x02,    7 /* Public */,
+       7,    1,  104,    2, 0x02,    9 /* Public */,
+       8,    1,  107,    2, 0x02,   11 /* Public */,
+       9,    1,  110,    2, 0x02,   13 /* Public */,
+      10,    2,  113,    2, 0x02,   15 /* Public */,
+      12,    6,  118,    2, 0x02,   18 /* Public */,
+      18,    7,  131,    2, 0x02,   25 /* Public */,
+      21,    4,  146,    2, 0x02,   33 /* Public */,
+      24,    0,  155,    2, 0x02,   38 /* Public */,
+      25,    2,  156,    2, 0x02,   39 /* Public */,
 
  // methods: parameters
+    QMetaType::Int, QMetaType::QString,    3,
     QMetaType::QString, QMetaType::QString,    3,
     QMetaType::QString, QMetaType::QString,    3,
     QMetaType::QString, QMetaType::QString,    3,
     QMetaType::QString, QMetaType::QString,    3,
-    QMetaType::QString, QMetaType::QString,    3,
-    QMetaType::QString, QMetaType::QString,    3,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString,    3,   10,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,   12,   13,   14,   15,   16,    3,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,   12,   18,   14,   15,   13,   16,   19,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,    3,   18,   21,   22,
+    QMetaType::Int, QMetaType::QString,    3,
+    QMetaType::Int, QMetaType::QString,    3,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,    3,   11,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,   13,   14,   15,   16,   17,    3,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,   13,   19,   15,   16,   14,   17,   20,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,    3,   19,   22,   23,
     QMetaType::QString,
-    QMetaType::QString, QMetaType::QString, QMetaType::QString,    3,   21,
+    QMetaType::QString, QMetaType::QString, QMetaType::QString,    3,   22,
 
        0        // eod
 };
@@ -117,25 +120,27 @@ void itemHelper::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<itemHelper *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: { QString _r = _t->getItemname((*reinterpret_cast< QString(*)>(_a[1])));
+        case 0: { int _r = _t->deleteTemp((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 1: { QString _r = _t->getItemname((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 1: { QString _r = _t->getItemCount((*reinterpret_cast< QString(*)>(_a[1])));
+        case 2: { QString _r = _t->getItemCount((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 2: { QString _r = _t->getSupplierName((*reinterpret_cast< QString(*)>(_a[1])));
+        case 3: { QString _r = _t->getSupplierName((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 3: { QString _r = _t->getSupplierEmail((*reinterpret_cast< QString(*)>(_a[1])));
+        case 4: { QString _r = _t->getSupplierEmail((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 4: { QString _r = _t->getAlert((*reinterpret_cast< QString(*)>(_a[1])));
+        case 5: { int _r = _t->getAlert((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 6: { int _r = _t->getReorder((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 7: _t->changePicture((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 8: _t->updateItemInfo((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< QString(*)>(_a[5])),(*reinterpret_cast< QString(*)>(_a[6]))); break;
+        case 9: _t->addItem((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< QString(*)>(_a[5])),(*reinterpret_cast< QString(*)>(_a[6])),(*reinterpret_cast< QString(*)>(_a[7]))); break;
+        case 10: _t->insertItem((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4]))); break;
+        case 11: { QString _r = _t->gettodayDate();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 5: { QString _r = _t->getReorder((*reinterpret_cast< QString(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 6: _t->changePicture((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 7: _t->updateItemInfo((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< QString(*)>(_a[5])),(*reinterpret_cast< QString(*)>(_a[6]))); break;
-        case 8: _t->addItem((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< QString(*)>(_a[5])),(*reinterpret_cast< QString(*)>(_a[6])),(*reinterpret_cast< QString(*)>(_a[7]))); break;
-        case 9: _t->insertItem((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4]))); break;
-        case 10: { QString _r = _t->gettodayDate();
-            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 11: { QString _r = _t->takeItem((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])));
+        case 12: { QString _r = _t->takeItem((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
@@ -151,7 +156,7 @@ const QMetaObject itemHelper::staticMetaObject = { {
 qt_incomplete_metaTypeArray<qt_meta_stringdata_itemHelper_t
 , QtPrivate::TypeAndForceComplete<itemHelper, std::true_type>
 
-, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>
+, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>
 
 >,
     nullptr
@@ -177,13 +182,13 @@ int itemHelper::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 12)
+        if (_id < 13)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 12;
+        _id -= 13;
     }
     return _id;
 }

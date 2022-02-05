@@ -5,6 +5,9 @@ import QtQuick.Controls 2.3
 import orderitemsmodel 1.0
 import orderHelper 1.0
 
+import activityLogHelper 1.0
+import profileinfo 1.0
+
 Page {
     property string userID
     property string currentfridgeID
@@ -25,6 +28,14 @@ Page {
 
     OrderConfirmScreen{
         id: theOrderConfirmScreen
+    }
+
+    ActivityLogHelper{
+        id: theActivityHelper
+    }
+
+    ProfileHelper{
+        id: theProfileHelper
     }
 
     function countItems(){
@@ -64,6 +75,8 @@ Page {
 
     function checkIfDone(){
         if(done != 0){
+            let action = "New order from " + currentsupplierName + " was placed"
+            theActivityHelper.createLog(action, theProfileHelper.getUsername(userID),currentfridgeID)
             thestackView.push(theOrderConfirmScreen, {uuid: uUID, supplierName: currentsupplierName})
         }
         else{

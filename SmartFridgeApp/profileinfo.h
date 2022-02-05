@@ -49,6 +49,42 @@ public:
         }
     }
 
+    Q_INVOKABLE int getAccountType(QString userID){
+        {
+
+        int type = NULL;
+
+        QSqlDatabase::removeDatabase("connectionpi");
+        QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL","connectionpi");
+        db.setHostName("localhost");
+        db.setPort(3306);
+        db.setUserName("root");
+        db.setPassword("admin");
+        db.setDatabaseName("sf");
+
+        db.open();
+
+        QSqlQuery query(db);
+
+        //get the user name
+        query.prepare("SELECT AccountType FROM user WHERE UserID = ?");
+        query.addBindValue(userID);
+
+
+        if (!query.exec()){
+             qDebug("get accounttype Action failed");
+        }
+
+
+        while (query.next()) {
+              type = query.value(0).toString().toInt();
+        }
+
+        return type;
+
+        }
+    }
+
 
     Q_INVOKABLE QString getImage(QString userID){
         {

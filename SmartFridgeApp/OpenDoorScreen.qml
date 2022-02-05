@@ -3,6 +3,10 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 import fridgeHandler 1.0
 
+import activityLogHelper 1.0
+import profileinfo 1.0
+import permissionHelper 1.0
+
 Page {
     id: page
     property string fridgeID
@@ -18,14 +22,37 @@ Page {
         id: theFridgeHandler
     }
 
+    ActivityLogHelper{
+        id: theActivityLogHelper
+    }
+
+    ProfileHelper{
+        id: theProfileHelper
+    }
+
+    PermissionHelper{
+        id: thePermissionHelper
+    }
+
 
     function openFridge(){
-        if(theFridgeHandler.getDoorStatus(fridgeID) == "OK"){
-            message.text = ""
-            thestackView.push(theUnlockedScreen, {fridgeID: fridgeID, userID: userID})
-        }
-        else{
-            message.text = "Doors of the fridge are not all closed"
+        let x = 0
+        x = thePermissionHelper.checkOpenPermission(userID)
+        if(x == 1){
+            if(theFridgeHandler.getDoorStatus(fridgeID) == "OK"){
+                message.text = ""
+
+                let action = "Front door unlocked"
+                theActivityLogHelper.createLog(action, theProfileHelper.getUsername(userID), fridgeID)
+
+                thestackView.push(theUnlockedScreen, {fridgeID: fridgeID, userID: userID})
+
+            }
+            else{
+                message.text = "Doors of the fridge are not all closed"
+            }
+        }else{
+            message.text = "You don't have permission"
         }
     }
 

@@ -26,7 +26,7 @@ Window {
     property string fridgeID
     property int accountType
     //property bool forRestaurant: true
-
+    readonly property bool forRestaurant: accountType == 1
     FridgeInventory{
         id: fridgeInvScreen
     }
@@ -38,6 +38,7 @@ Window {
     ProfileHelper{
         id: profilehelper
     }
+
 
 
     /*
@@ -193,7 +194,7 @@ Window {
         delegate: ItemDelegate {
             onClicked: {
                     thestackView.clear()
-                    thestackView.push(model.link , {currentfridgeID: fridgeID})
+                    thestackView.push(model.link , {currentfridgeID: fridgeID, userID: currentUserID })
                     //thestackView.push("qrc:/chat2.qml", { chatroomHeader: model.GPName, topicID: model.TopicID, senderID: currentUserID})
             }
 
@@ -251,6 +252,7 @@ Window {
                 ListElement {
                     name: "History"
                     icon: "images/history.png"
+                    link: "qrc:/ActivityLog.qml"
                 }
 
                 ListElement {
@@ -260,6 +262,7 @@ Window {
                 ListElement{
                     name: "Management"
                     icon: "images/people.png"
+                    link: "qrc:/ManagementScreen.qml"
                 }
             }
 
@@ -293,7 +296,7 @@ Window {
         Text {
             id: text1
             x: 164
-            y: 247
+            y: 206
             width: 453
             height: 107
             text: qsTr("Smart Fridge")
@@ -304,7 +307,7 @@ Window {
         Text {
             id: text2
             x: 623
-            y: 247
+            y: 206
             text: qsTr("TM")
             font.pixelSize: 30
             font.bold: true
@@ -313,7 +316,7 @@ Window {
         Text {
             id: text3
             x: 519
-            y: 360
+            y: 319
             text: qsTr("By Future Fridges")
             font.pixelSize: 20
         }
@@ -339,7 +342,7 @@ Window {
         Image {
             id: image1
             x: 78
-            y: 261
+            y: 220
             width: 80
             height: 80
             source: "images/bulb.png"
@@ -376,7 +379,7 @@ Window {
                             to: 1
                             duration: 1
                         }
-                    }
+              }
 
               pushExit: Transition {
                   PropertyAnimation{
@@ -385,6 +388,27 @@ Window {
                       to: 0
                       duration: 1
                   }
+              }
+
+              Image {
+                  id: icon
+                  x: 340
+                  y: 393
+                  width: 100
+                  height: 100
+                  source: forRestaurant ? "images/forRest.png" : "images/forShop.png"
+              }
+
+              Text {
+                  id: text5
+                  x: 196
+                  y: 499
+                  width: 388
+                  height: 16
+                  text: forRestaurant ? qsTr("For restaurants") : qsTr("For shops")
+                  //text: qsTr(forRestaurant.toString())
+                  font.pixelSize: 12
+                  horizontalAlignment: Text.AlignHCenter
               }
             }
 
@@ -417,7 +441,8 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.66}D{i:1}D{i:2}D{i:3}D{i:5}D{i:4}D{i:10}D{i:11}D{i:13}D{i:12}
-D{i:25}D{i:27}D{i:28}D{i:29}D{i:30}D{i:31}D{i:32}D{i:33}D{i:42}D{i:26}
+    D{i:0;formeditorZoom:1.1}D{i:1}D{i:2}D{i:3}D{i:4}D{i:7}D{i:8}D{i:9}D{i:10}D{i:6}D{i:5}
+D{i:11}D{i:12}D{i:14}D{i:13}D{i:26}D{i:28}D{i:29}D{i:30}D{i:31}D{i:32}D{i:33}D{i:43}
+D{i:44}D{i:34}D{i:45}D{i:27}
 }
 ##^##*/

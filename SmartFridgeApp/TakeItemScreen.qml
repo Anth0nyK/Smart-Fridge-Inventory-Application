@@ -70,6 +70,7 @@ Page {
             onClicked: {
                 thestackView.pop()
                 theinventorymodel.updateinventoryModel()
+                theinventorymodel3.updateinventoryModel()
             }
         }
 
@@ -88,7 +89,7 @@ Page {
             delegate: ItemDelegate {
                 onClicked: {
                         //console.info("model.itemID = " + model.itemID)
-                        thestackView.push(theTakeItemInfoScreen, {itemID: model.itemID, itemPic: model.itemPic, currentfridgeID: currentfridgeID})
+                        thestackView.push(theTakeItemInfoScreen, {itemID: model.itemID, itemPic: model.itemPic, currentfridgeID: currentfridgeID, userID: userID})
 
                         //thestackView.clear()
                         //thestackView.push("qrc:/chat2.qml", { chatroomHeader: model.GPName, topicID: model.TopicID, senderID: currentUserID})

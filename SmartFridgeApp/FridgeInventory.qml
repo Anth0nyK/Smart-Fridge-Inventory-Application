@@ -2,6 +2,7 @@ import QtQuick 2.4
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 
+import permissionHelper 1.0
 import inventorymodel 1.0
 
 Page {
@@ -26,6 +27,14 @@ Page {
         id: theoOpenDoorScreen
     }
 
+    PermissionScreen{
+        id: thePermissionScreen
+    }
+
+    PermissionHelper {
+        id: thePermissionHelper
+    }
+
     function testing(){
         text3.text = gridView.getDelegateInstanceAt(1).itemName
     }
@@ -44,7 +53,34 @@ Page {
         text3.text = counter
     }
 
+    function openPermissionScreen(){
+        let x = 0
+        x = thePermissionHelper.checkIfAdmin(userID)
+        if(x == 1){
+            thestackView.push(thePermissionScreen, {currentfridgeID: currentfridgeID, userID: currentUserID})
+        }
+    }
 
+    function checkPermission(){
+        let x = 0
+        x = thePermissionHelper.checkViewPermission(userID)
+        if(x == 1){
+            return true
+        }else{
+            text4.text = "You don't have permission to view the inventory"
+            return false
+        }
+    }
+
+    function checkIfAdmin(){
+        let x = 0
+        x = thePermissionHelper.checkIfAdmin(userID)
+        if (x == 1){
+            return true
+        }else{
+            return false
+        }
+    }
 
     Rectangle {
         id: rectangle1
@@ -81,7 +117,7 @@ Page {
 
             Image {
                 id: mailButton
-                x: 450
+                x: 500
                 y: 21
                 width: 65
                 height: 34
@@ -102,7 +138,7 @@ Page {
                     font.pixelSize: 12
                 }
             }
-
+/*
             Image {
                 id: peopleButton
                 x: 520
@@ -110,7 +146,7 @@ Page {
                 width: 65
                 height: 34
                 source: "images/people.png"
-
+                visible: checkIfAdmin()
                 fillMode: Image.PreserveAspectFit
                 MouseArea {
                     anchors.fill: parent
@@ -119,7 +155,9 @@ Page {
                     anchors.leftMargin: 0
                     anchors.topMargin: 0
                     onClicked: {
-                        console.info("image clicked!2")
+                        //console.info("image clicked!2")
+                        //thestackView.push(thePermissionScreen, {currentfridgeID: currentfridgeID, userID: currentUserID})
+                        openPermissionScreen()
                     }
                 }
                 Text {
@@ -131,7 +169,7 @@ Page {
                 }
 
             }
-
+*/
             Image {
                 id: unlockButton
                 x: 590
@@ -168,6 +206,8 @@ Page {
                 text: ""
                 font.pixelSize: 25
             }
+
+
         }
 
         GridView {
@@ -181,14 +221,15 @@ Page {
             clip: true
             height: 473
             cellWidth: 185
+            visible: checkPermission()
             cellHeight: 200
             delegate: ItemDelegate {
                 objectName: "summaryDelegate"
                 property int index: model.index
-                property string itemName: amountInput.text
+                //property string itemName: amountInput.text
                 onClicked: {
                         //console.info("model.itemID = " + model.itemID)
-                        thestackView.push(theItemScreen, {itemID: model.itemID, itemPic: model.itemPic})
+                        thestackView.push(theItemScreen, {itemID: model.itemID, itemPic: model.itemPic, currentUserID: currentUserID, currentfridgeID: currentfridgeID})
                         //thestackView.clear()
                         //thestackView.push("qrc:/chat2.qml", { chatroomHeader: model.GPName, topicID: model.TopicID, senderID: currentUserID})
                 }
@@ -270,7 +311,7 @@ Page {
                     color: "#43b05c"
                 }
                 onClicked: {
-                    thestackView.push(theNewItemScreen, {fridgeID: currentfridgeID})
+                    thestackView.push(theNewItemScreen, {fridgeID: currentfridgeID, currentUserID: currentUserID})
                 }
             }
 
@@ -328,7 +369,15 @@ Page {
             }
 
 */
-
+        Text {
+            id: text4
+            x: 298
+            y: 301
+            width: 185
+            height: 34
+            font.pixelSize: 25
+            horizontalAlignment: Text.AlignHCenter
+        }
     }
 
 
@@ -339,7 +388,7 @@ Page {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.75}D{i:1}D{i:2}D{i:3}D{i:6}D{i:8}D{i:9}D{i:7}D{i:11}D{i:12}
-D{i:10}D{i:14}D{i:15}D{i:13}D{i:16}D{i:5}D{i:23}D{i:25}D{i:17}D{i:4}
+    D{i:0;formeditorZoom:0.66}D{i:1}D{i:2}D{i:3}D{i:4}D{i:5}D{i:8}D{i:10}D{i:11}D{i:9}
+D{i:13}D{i:14}D{i:12}D{i:15}D{i:7}D{i:22}D{i:24}D{i:16}D{i:25}D{i:6}
 }
 ##^##*/

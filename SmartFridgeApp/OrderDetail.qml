@@ -2,18 +2,15 @@ import QtQuick 2.4
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 
-import ordermodel 1.0
+import orderdetailmodel 1.0
 
 Page {
-    property string userID
-    property string currentfridgeID
+    property string currentorderID
 
     width: 780
     height: 585
 
-    NewOrderScreen{
-        id:theNewOrderScreen
-    }
+
 
     Rectangle {
         id: rectangle1
@@ -44,7 +41,7 @@ Page {
                 id: text1
                 x: 25
                 y: 21
-                text: qsTr("Orders")
+                text: qsTr("Orders > " + currentorderID)
                 font.pixelSize: 25
             }
 
@@ -52,7 +49,7 @@ Page {
                 id: text2
                 x: 25
                 y: 82
-                text: qsTr("Pending orders")
+                text: qsTr("Order details")
                 font.pixelSize: 22
                 font.bold: true
             }
@@ -61,7 +58,7 @@ Page {
                 id: text3
                 x: 25
                 y: 113
-                text: qsTr("Order ID")
+                text: qsTr("Item name")
                 font.pixelSize: 17
                 font.bold: false
             }
@@ -70,87 +67,86 @@ Page {
                 id: text4
                 x: 300
                 y: 113
-                text: qsTr("Supplier ")
-                font.pixelSize: 17
-                font.bold: false
-            }
-
-            Text {
-                id: text5
-                x: 407
-                y: 113
-                text: qsTr("Supplier email")
-                font.pixelSize: 17
-                font.bold: false
-            }
-
-            Text {
-                id: text6
-                x: 573
-                y: 113
-                text: "Order date"
+                text: qsTr("Quantity")
                 font.pixelSize: 17
                 font.bold: false
             }
         }
 
-        ListView {
-            id: listView
-            x: 12
-            y: 154
-            width: 756
-            height: 375
-            clip: true
-            delegate: Item {
-                id: item1
-                x: 5
-                width: 80
-                height: 40
 
-                onClicked: {
-                        //console.info("model.itemID = " + model.itemID)
-                        thestackView.push(theItemScreen, {itemID: model.itemID, itemPic: model.itemPic})
-                        //thestackView.clear()
-                        //thestackView.push("qrc:/chat2.qml", { chatroomHeader: model.GPName, topicID: model.TopicID, senderID: currentUserID})
+        GridView {
+            id: gridView
+            x: 22
+            y: 156
+            width: 736
+            height: 410
+            model: OrderdetailModel{
+                id: theorderdetailmodel
+                theorderID: currentorderID
+            }
+            cellWidth: 653
+            delegate: ItemDelegate {
+                x: 5
+                width: 739
+                height: 50
+                onClicked:{
+
                 }
 
                 Row {
-                    id: row1
-                    z: 0
-                    anchors.topMargin: 0
-
-                    spacing: 50
-
-                    Text {
-                        text: orderID
-                        anchors.verticalCenter: parent.verticalCenter
-                        font.bold: true
+                    spacing: 5
+                    /*
+                    Rectangle {
+                        width: 653
+                        height: 40
+                        color: colorCode
+                        //anchors.horizontalCenter: parent.horizontalCenter
+                    }
+                    */
+                    Column {
+                        Text {
+                            id: theItemName
+                            x: 5
+                            width:100
+                            text: model.itemName
+                            font.bold: true
+                            //anchors.horizontalCenter: parent.horizontalCenter
+                        }
                     }
 
-                    Text {
-                        text: supplierName
-                        anchors.verticalCenter: parent.verticalCenter
-                        font.bold: true
+                    Column {
+
+                        Text {
+                            id: theItemCount
+                            x: 180
+                            width:10
+                            font.bold: true
+                            text: model.itemCount
+                        }
                     }
 
-                    Text {
-                        text: supplierEmail
-                        anchors.verticalCenter: parent.verticalCenter
-                        font.bold: true
+                    /*
+                    Column {
+                        Text {
+                            id: theSupplierEmail
+                            x: 250
+                            width:100
+                            text: model.supplierEmail
+                        }
                     }
 
-                    Text {
-                        text: dateTime
-                        anchors.verticalCenter: parent.verticalCenter
-                        font.bold: true
+
+                    Column {
+                        Text {
+                            id: theOrderDate
+                            x: 350
+                            text: model.dateTime
+                        }
                     }
+                    */
                 }
             }
-            model: OrderModel{
-                id: theordermodel
-                theorderID: currentfridgeID
-
-            }
+            cellHeight: 50
         }
 
 
@@ -187,6 +183,21 @@ Page {
             text: qsTr("New order")
             font.pixelSize: 12
             font.bold: true
+        }
+
+
+        Button {
+            id: backbutton
+            x: 726
+            y: 81
+            text: qsTr("Back")
+            font.pointSize: 13
+            font.bold: true
+            onClicked: {
+                thestackView.pop()
+                theordermodel.updateorderModel()
+
+            }
         }
 
     }

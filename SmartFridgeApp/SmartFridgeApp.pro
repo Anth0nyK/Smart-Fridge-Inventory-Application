@@ -5,12 +5,16 @@ QT += sql
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        activitylogmodel.cpp \
         inventorymodel.cpp \
         itemmodel.cpp \
         main.cpp \
+        orderdetailmodel.cpp \
         orderitemsmodel.cpp \
         ordermodel.cpp \
-        suppliermodel.cpp
+        permissionmodel.cpp \
+        suppliermodel.cpp \
+        usersmodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -26,13 +30,21 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    activityLogHelper.h \
+    activitylogmodel.h \
     fridgeHandler.h \
     inventorymodel.h \
     itemHelper.h \
     itemmodel.h \
     login.h \
     orderHelper.h \
+    orderdetailmodel.h \
     orderitemsmodel.h \
     ordermodel.h \
+    permissionHelper.h \
+    permissionmodel.h \
     profileinfo.h \
-    suppliermodel.h
+    restaurantInfoHelper.h \
+    suppliermodel.h \
+    usersManagementHelper.h \
+    usersmodel.h

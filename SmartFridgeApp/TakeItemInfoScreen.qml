@@ -2,6 +2,8 @@ import QtQuick 2.14
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 import iteminfo 1.0
+import activityLogHelper 1.0
+import profileinfo 1.0
 
 Page {
     id: page
@@ -10,6 +12,8 @@ Page {
     property string currentfridgeID
 
     property string status
+    property string userID
+
     //property StackView theStack: StackView.view
     width: 780
     height: 585
@@ -18,19 +22,34 @@ Page {
         id: itemtool
     }
 
+    ActivityLogHelper{
+        id: theActivityLogHelper
+    }
+
+    ProfileHelper {
+        id: theProfileHelper
+    }
+
 
     function takeItem(){
-        if(amountInput.text != ""){
-            status = itemtool.takeItem(itemID, amountInput.text)
+        if(amountInput.value != 0){
+            status = itemtool.takeItem(itemID, amountInput.value)
             if(status == "error"){
                 message.text = "Invalid input"
-                amountInput.text = ""
+                amountInput.value = 0
                 }
             if(status == "tooLarge"){
                 message.text = "Amount is larger than the quantity"
-                amountInput.text = ""
+                amountInput.value = 0
             }
-
+            if(status == "OK"){
+                message.text = "Took out " + amountInput.value + " from the fridge"
+                quantity1.visible = false
+                quantity2.visible = true
+                quantity2.text = qsTr("Quantity: " + itemtool.getItemCount(itemID))
+                let action = "Took out " + itemtool.getItemname(itemID) + " x" + amountInput.value
+                theActivityLogHelper.createLog(action, theProfileHelper.getUsername(userID), currentfridgeID)
+            }
         }
     }
 
@@ -71,6 +90,8 @@ Page {
                 thestackView.pop()
                 theinventorymodel.updateinventoryModel()
                 theinventorymodel3.updateinventoryModel()
+                quantity1.visible = true
+                quantity2.visible = false
                 //theinventorymodel2.updateinventoryModel()
             }
         }
@@ -103,6 +124,7 @@ Page {
                 radius: 4
                 border.width: 2
 
+                /*
                 TextInput {
                     id: amountInput
                     x: 8
@@ -110,6 +132,15 @@ Page {
                     width: 107
                     height: 20
                     font.pixelSize: 12
+                }*/
+
+                SpinBox {
+                    id: amountInput
+                    x: 8
+                    y: 4
+                    width: 110
+                    height: 25
+                    from: 0
                 }
             }
         }
@@ -128,7 +159,7 @@ Page {
                 //radius: roundButton.radius
             }
             enabled: {
-                amountInput.length > 0;
+                amountInput.value > 0;
             }
             flat: false
             font.bold: true
@@ -161,7 +192,7 @@ Page {
         }
 
         Text {
-            id: itemnameText2
+            id: quantity1
             x: 290
             y: 388
             text: qsTr("Quantity: " + itemtool.getItemCount(itemID))
@@ -186,6 +217,18 @@ Page {
             font.pixelSize: 25
             font.bold: false
         }
+
+        Text {
+            id: quantity2
+            x: 291
+            y: 388
+            visible: false
+            text: qsTr("Quantity: " + itemtool.getItemCount(itemID))
+            font.pixelSize: 25
+            font.bold: false
+        }
+
+
 
     }
 

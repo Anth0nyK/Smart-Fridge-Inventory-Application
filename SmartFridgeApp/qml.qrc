@@ -33,5 +33,16 @@
         <file>OrderConfirmScreen.qml</file>
         <file>images/order.png</file>
         <file>OrderDetail.qml</file>
+        <file>ActivityLog.qml</file>
+        <file>PermissionScreen.qml</file>
+        <file>images/forRest.png</file>
+        <file>images/forShop.png</file>
+        <file>ManagementScreen.qml</file>
+        <file>images/users.png</file>
+        <file>RestaurantInfoScreen.qml</file>
+        <file>UsersManagementScreen.qml</file>
+        <file>UsersManagementInfoScreen.qml</file>
+        <file>CreateAccountScreen.qml</file>
+		<file>images/default.png</file>
     </qresource>
 </RCC>

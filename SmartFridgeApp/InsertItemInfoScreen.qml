@@ -2,23 +2,37 @@ import QtQuick 2.14
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 import iteminfo 1.0
+import activityLogHelper 1.0
+import profileinfo 1.0
 
 Page {
     id: page
     property string itemID
     property string itemPic
     property string currentfridgeID
+    property string userID
     //property StackView theStack: StackView.view
     width: 780
     height: 585
+
+    ActivityLogHelper{
+        id: theActivityLogHelper
+    }
+
+    ProfileHelper{
+        id: theProfileHelper
+    }
 
     ItemHelper{
         id: itemtool
     }
 
     function insertItem(){
-        if(amountInput.text != "" && expiryInput.text != ""){
-            itemtool.insertItem(itemID, currentfridgeID, amountInput.text, expiryInput.text)
+        if(amountInput.value > 0 && expiryInput.text != ""){
+            itemtool.insertItem(itemID, currentfridgeID, amountInput.value, expiryInput.text)
+            message = "Inserted " + amountInput.value + " into the fridge"
+            let action = "Inserted " + itemtool.getItemname(itemID) + " x" + amountInput.value
+            theActivityLogHelper.createLog(action, theProfileHelper.getUsername(userID), currentfridgeID)
         }
     }
 
@@ -90,6 +104,7 @@ Page {
                 radius: 4
                 border.width: 2
 
+                /*
                 TextInput {
                     id: amountInput
                     x: 8
@@ -97,6 +112,15 @@ Page {
                     width: 107
                     height: 20
                     font.pixelSize: 12
+                }*/
+
+                SpinBox {
+                    id: amountInput
+                    x: 8
+                    y: 8
+                    width: 107
+                    height: 20
+                    from: 0
                 }
             }
 
@@ -135,7 +159,7 @@ Page {
                 //radius: roundButton.radius
             }
             enabled: {
-                amountInput.length > 0;
+                amountInput.value > 0;
                 expiryInput.length > 0;
             }
             flat: false
@@ -203,6 +227,8 @@ Page {
             font.pixelSize: 25
             font.bold: false
         }
+
+
 
     }
 

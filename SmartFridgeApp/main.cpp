@@ -11,6 +11,14 @@
 #include <ordermodel.h>
 #include <suppliermodel.h>
 #include <orderitemsmodel.h>
+#include <orderdetailmodel.h>
+#include <activityLogHelper.h>
+#include <activitylogmodel.h>
+#include <permissionmodel.h>
+#include <permissionHelper.h>
+#include <restaurantInfoHelper.h>
+#include <usersmodel.h>
+#include <usersManagementHelper.h>
 
 int main(int argc, char *argv[])
 {
@@ -29,6 +37,14 @@ int main(int argc, char *argv[])
     qmlRegisterType<orderModel>("ordermodel",1,0,"OrderModel");
     qmlRegisterType<supplierModel>("suppliermodel",1,0,"SupplierModel");
     qmlRegisterType<orderitemsmodel>("orderitemsmodel",1,0,"OrderItemsModel");
+    qmlRegisterType<orderdetailModel>("orderdetailmodel",1,0,"OrderdetailModel");
+    qmlRegisterType<activityLogHelper>("activityLogHelper",1,0,"ActivityLogHelper");
+    qmlRegisterType<activitylogmodel>("activitylogmodel",1,0,"Activitylogmodel");
+    qmlRegisterType<permissionModel>("permissionModel",1,0,"PermissionModel");
+    qmlRegisterType<permissionHelper>("permissionHelper",1,0,"PermissionHelper");
+    qmlRegisterType<restaurantinfoHelper>("restaurantinfoHelper",1,0,"RestaurantinfoHelper");
+    qmlRegisterType<usersmodel>("usersmodel",1,0,"UsersModel");
+    qmlRegisterType<usersManagementHelper>("usersManagementHelper",1,0,"UsersManagementHelper");
 
     //qmlRegisterType<TableModel>("tablemodel",1,0,"TableModel");
 

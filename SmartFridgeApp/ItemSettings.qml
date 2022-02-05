@@ -2,17 +2,29 @@ import QtQuick 2.14
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 import iteminfo 1.0
+import activityLogHelper 1.0
+import profileinfo 1.0
 
 Page {
     id: page
     property string itemID
     property string itemPic
     //property StackView theStack: StackView.view
+    property string currentUserID
+    property string currentfridgeID
     width: 780
     height: 585
 
+    ProfileHelper{
+        id: theProfileHelper
+    }
+
     ItemHelper{
         id: itemtool
+    }
+
+    ActivityLogHelper{
+        id: theActivityLogHelper
     }
 
     function changeItemPic(){
@@ -21,15 +33,36 @@ Page {
             itemtool.changePicture(itemID,pictureLink.text)
             pictureLink.text = ""
             message.text = "Updated the item picture"
+            let action = "Profile picture of item: " + itemtool.getItemname(itemID) + " was updated"
+            theActivityLogHelper.createLog(action, theProfileHelper.getUsername(currentUserID), currentfridgeID)
         }
     }
 
     function updateItemInfo(){
-        if(itemnameField.text != "" && supplierField.text != "" && alertField != "" && reorderField.text != "" && emailField.text != ""){
-            itemtool.updateItemInfo(itemnameField.text, supplierField.text, alertField.text,reorderField.text, emailField.text, itemID)
+        if(itemnameField.text != "" && supplierField.text != "" && emailField.text != ""){
+            itemtool.updateItemInfo(itemnameField.text, supplierField.text, alertField.value,reorderField.value, emailField.text, itemID)
             message.text = "Updated the item info"
+            let action = "Item info of item: " + itemtool.getItemname(itemID) + "was updated"
+            theActivityLogHelper.createLog(action, theProfileHelper.getUsername(currentUserID), currentfridgeID)
+
         }
 
+    }
+
+    function deleteTemp(){
+        let x = 0
+        let action = "Deleted item template of item: " + itemtool.getItemname(itemID)
+        x = itemtool.deleteTemp(itemID)
+        if(x == 1){
+            message.text = "Deleted this item template"
+            theActivityLogHelper.createLog(action, theProfileHelper.getUsername(currentUserID), currentfridgeID)
+            button1.visible = false
+            delete1.visible = false
+            delete2.visible = false
+        }
+        if(x == 2){
+            message.text = "You need to clear out this item from the fridge first"
+        }
     }
 
     Rectangle {
@@ -197,7 +230,7 @@ Page {
 
         Button {
             id: button1
-            x: 349
+            x: 255
             y: 507
             text: qsTr("Save changes")
             enabled: true
@@ -245,6 +278,42 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 21
             font.bold: false
+
+        }
+
+        Button {
+            id: delete1
+            x: 582
+            y: 423
+            text: qsTr("Delete item template")
+            hoverEnabled: false
+            enabled: true
+            flat: false
+            font.bold: true
+            background: Rectangle {
+                color: "#9e0000"
+            }
+            onClicked: {
+                delete2.visible = true
+            }
+        }
+
+        Button {
+            id: delete2
+            x: 599
+            y: 463
+            visible: false
+            text: qsTr("Confirm delete")
+            hoverEnabled: false
+            enabled: true
+            flat: false
+            font.bold: true
+            background: Rectangle {
+                color: "#9e0000"
+            }
+            onClicked: {
+                deleteTemp()
+            }
         }
 
 /*
@@ -291,6 +360,7 @@ Page {
         radius: 5
         border.width: 2
 
+        /*
         TextInput {
             id: alertField
             x: 8
@@ -299,6 +369,17 @@ Page {
             height: 20
             text: qsTr(itemtool.getAlert(itemID))
             font.pixelSize: 12
+        }
+        */
+
+        SpinBox {
+            id: alertField
+            x: 8
+            y: 8
+            width: 56
+            height: 19
+            from: 0
+            value: itemtool.getAlert(itemID)
         }
     }
 
@@ -312,6 +393,7 @@ Page {
         radius: 5
         border.width: 2
 
+        /*
         TextInput {
             id: reorderField
             x: 8
@@ -320,6 +402,16 @@ Page {
             height: 20
             text: qsTr(itemtool.getReorder(itemID))
             font.pixelSize: 12
+        }
+        */
+        SpinBox {
+            id: reorderField
+            x: 8
+            y: 8
+            width: 56
+            height: 19
+            from: 0
+            value: itemtool.getReorder(itemID)
         }
     }
 
@@ -333,6 +425,7 @@ Page {
         radius: 5
         border.width: 2
 
+
         TextInput {
             id: emailField
             x: 8
@@ -342,6 +435,7 @@ Page {
             text: qsTr(itemtool.getSupplierEmail(itemID))
             font.pixelSize: 12
         }
+
     }
 
 
@@ -349,8 +443,8 @@ Page {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.66}D{i:1}D{i:3}D{i:4}D{i:5}D{i:6}D{i:7}D{i:9}D{i:10}D{i:11}
-D{i:12}D{i:13}D{i:15}D{i:14}D{i:17}D{i:16}D{i:18}D{i:2}D{i:21}D{i:20}D{i:23}D{i:22}
-D{i:25}D{i:24}
+    D{i:0;formeditorZoom:0.75}D{i:1}D{i:2}D{i:3}D{i:5}D{i:6}D{i:7}D{i:8}D{i:9}D{i:11}
+D{i:12}D{i:13}D{i:14}D{i:15}D{i:17}D{i:16}D{i:19}D{i:18}D{i:20}D{i:23}D{i:22}D{i:24}
+D{i:25}D{i:27}D{i:4}D{i:30}D{i:29}D{i:32}D{i:31}D{i:34}D{i:33}
 }
 ##^##*/

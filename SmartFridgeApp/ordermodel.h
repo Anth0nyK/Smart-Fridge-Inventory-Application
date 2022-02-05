@@ -24,4 +24,5 @@ public:
 private:
     QString m_orderID;
 };
+
 #endif // ORDERMODEL_H

@@ -20,6 +20,62 @@ class itemHelper : public QObject
 public:
     explicit itemHelper (QObject* parent = 0 ) : QObject(parent) {}
 
+    Q_INVOKABLE int deleteTemp(QString itemID){
+        {
+
+        int itemCount = NULL;
+
+        QSqlDatabase::removeDatabase("connectionii");
+        QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL","connectionii");
+        db.setHostName("localhost");
+        db.setPort(3306);
+        db.setUserName("root");
+        db.setPassword("admin");
+        db.setDatabaseName("sf");
+
+        db.open();
+
+        QSqlQuery query(db);
+
+        //check if itemcount > 0
+        query.prepare("SELECT itemCount FROM inventory WHERE itemID = ?");
+        query.addBindValue(itemID);
+
+
+        if (!query.exec()){
+             qDebug("get itemcount for delete Action failed");
+             return 0;
+        }
+
+
+        while (query.next()) {
+              itemCount = query.value(0).toString().toInt();
+        }
+
+        if(itemCount > 0){
+            return 2;
+        }
+
+
+
+
+        //delete
+        query.prepare("DELETE FROM `sf`.`inventory` WHERE (`itemID` = ?);");
+        query.addBindValue(itemID);
+
+
+        if (!query.exec()){
+             qDebug("delete item template Action failed");
+             return 0;
+        }
+
+
+        return 1;
+
+        }
+    }
+
+
     Q_INVOKABLE QString getItemname(QString itemID){
         {
 
@@ -165,10 +221,10 @@ public:
         }
     }
 
-    Q_INVOKABLE QString getAlert(QString itemID){
+    Q_INVOKABLE int getAlert(QString itemID){
         {
 
-        QString Alert = NULL;
+        int Alert = NULL;
 
         QSqlDatabase::removeDatabase("connectionpi");
         QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL","connectionpi");
@@ -193,7 +249,7 @@ public:
 
 
         while (query.next()) {
-              Alert = query.value(0).toString();
+              Alert = query.value(0).toString().toInt();
         }
 
         return Alert;
@@ -202,10 +258,10 @@ public:
     }
 
 
-    Q_INVOKABLE QString getReorder(QString itemID){
+    Q_INVOKABLE int getReorder(QString itemID){
         {
 
-        QString Reorder = NULL;
+        int Reorder = NULL;
 
         QSqlDatabase::removeDatabase("connectionpi");
         QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL","connectionpi");
@@ -230,7 +286,7 @@ public:
 
 
         while (query.next()) {
-              Reorder = query.value(0).toString();
+              Reorder = query.value(0).toString().toInt();
         }
 
         return Reorder;

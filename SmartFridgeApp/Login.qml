@@ -17,6 +17,7 @@ Window {
     property string userID
     property string fridgeID
     property string username
+    property int accountType
 
     LoginClass {
         id: logintool
@@ -45,8 +46,9 @@ Window {
         {
             fridgeID = profiletool.getFridgeID(userID)
             username = profiletool.getUsername(userID)
+            accountType = profiletool.getAccountType(userID)
             var component = Qt.createComponent("main.qml");
-            var win = component.createObject(loginscreen,{currentUserID: userID,currentUserName: username, fridgeID: fridgeID});
+            var win = component.createObject(loginscreen,{currentUserID: userID,currentUserName: username, fridgeID: fridgeID, accountType: accountType});
             win.show();
             loginscreen.hide();
         }

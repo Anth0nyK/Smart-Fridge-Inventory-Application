@@ -7,11 +7,14 @@ import Qt.labs.qmlmodels
 import itemmodel 1.0
 import iteminfo 1.0
 import inventorymodel 1.0
+
 Page {
     id: page
     property string itemID
     property string itemPic
+    property string currentUserID
     //property StackView theStack: StackView.view
+    property string currentfridgeID
     width: 780
     height: 585
 
@@ -142,7 +145,7 @@ Page {
             id: alertField
             x: 335
             y: 179
-            text: qsTr(itemtool.getAlert(itemID))
+            text: qsTr("" +itemtool.getAlert(itemID))
             font.pixelSize: 20
             font.bold: true
         }
@@ -151,7 +154,7 @@ Page {
             id: reorderField
             x: 370
             y: 212
-            text: qsTr(itemtool.getReorder(itemID))
+            text: qsTr("" + itemtool.getReorder(itemID))
             font.pixelSize: 20
             font.bold: true
         }
@@ -270,7 +273,7 @@ Page {
                 anchors.topMargin: 0
                 onClicked: {
                     //console.info("image clicked!")
-                    thestackView.push(theitemsettings, {itemID: itemID, itemPic: itemPic})
+                    thestackView.push(theitemsettings, {itemID: itemID, itemPic: itemPic, currentUserID: currentUserID, currentfridgeID: currentfridgeID})
                     theitemmodel.updateitemModel()
                 }
             }

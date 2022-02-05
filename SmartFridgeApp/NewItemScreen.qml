@@ -2,15 +2,27 @@ import QtQuick 2.14
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 import iteminfo 1.0
+import activityLogHelper 1.0
+import profileinfo 1.0
 
 Page {
     id: page
     property string fridgeID
+    property string currentUserID
+
     width: 780
     height: 585
 
     ItemHelper{
         id: itemtool
+    }
+
+    ActivityLogHelper{
+        id: theActivityLogHelper
+    }
+
+    ProfileHelper{
+        id: theProfileHelper
     }
 
     function changeItemPic(){
@@ -21,14 +33,25 @@ Page {
     }
     //QString itemName, QString fridgeID , QString alertWhen, QString reorderWhen, QString supplierName, QString supplierEmail, QString itemPic
     function createItem(){
-        if(itemnameField.text != "" && alertField.text != "" && reorderField.text != "" && supplierField.text != "" && supplieremailField.text != "" && pictureLink.text != ""){
-            itemtool.addItem(itemnameField.text, fridgeID, alertField.text, reorderField.text, supplierField.text, supplierField.text, pictureLink.text)
+        if(itemnameField.text != "" && supplierField.text != "" && supplieremailField.text != ""){
+            let link = ""
+            if(pictureLink.text == ""){
+                link = "https://cdn-icons-png.flaticon.com/512/985/985552.png"
+            }
+
+            itemtool.addItem(itemnameField.text, fridgeID, alertField.value, reorderField.value, supplierField.text, supplierField.text, link)
+            message.text = "Created new item template"
+            let action = "New item: " + itemnameField.text + " was added"
+            theActivityLogHelper.createLog(action, theProfileHelper.getUsername(currentUserID), fridgeID)
+
             itemnameField.text = ""
-            alertField.text = ""
-            reorderField.text = ""
+            alertField.value = 0
+            reorderField.value = 0
             supplierField.text = ""
-            supplieremailField.text = ""
+            emailField.text = ""
             pictureLink.text = ""
+        }else{
+            message.text = "Fields cannot be empty"
         }
     }
 
@@ -202,8 +225,8 @@ Page {
             enabled: {
                 itemnameField.length > 0;
                 supplierField.length > 0;
-                alertField.length > 0;
-                reorderField.length > 0;
+                //alertField.length > 0;
+                //reorderField.length > 0;
                 emailField.length > 0;
             }
             hoverEnabled: false
@@ -255,6 +278,8 @@ Page {
 
 
 
+
+
     }
 
     Rectangle {
@@ -266,7 +291,7 @@ Page {
         color: "#ffffff"
         radius: 5
         border.width: 2
-
+/*
         TextInput {
             id: alertField
             x: 8
@@ -274,6 +299,15 @@ Page {
             width: 56
             height: 20
             font.pixelSize: 12
+        }
+        */
+        SpinBox {
+            id: alertField
+            x: 10
+            y: 5
+            width: 53
+            height: 24
+            from: 0
         }
     }
 
@@ -286,7 +320,7 @@ Page {
         color: "#ffffff"
         radius: 5
         border.width: 2
-
+/*
         TextInput {
             id: reorderField
             x: 8
@@ -294,6 +328,15 @@ Page {
             width: 56
             height: 20
             font.pixelSize: 12
+        }
+        */
+        SpinBox {
+            id: reorderField
+            x: 10
+            y: 5
+            width: 53
+            height: 24
+            from: 0
         }
     }
 
