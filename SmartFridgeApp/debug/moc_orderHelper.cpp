@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_orderHelper_t {
-    const uint offsetsAndSize[22];
-    char stringdata0[111];
+    const uint offsetsAndSize[24];
+    char stringdata0[121];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_orderHelper_t, stringdata0) + ofs), len 
@@ -37,15 +37,16 @@ QT_MOC_LITERAL(33, 7), // "orderID"
 QT_MOC_LITERAL(41, 8), // "fridgeID"
 QT_MOC_LITERAL(50, 12), // "supplierName"
 QT_MOC_LITERAL(63, 13), // "supplierEmail"
-QT_MOC_LITERAL(77, 14), // "addItemToOrder"
-QT_MOC_LITERAL(92, 8), // "itemName"
-QT_MOC_LITERAL(101, 9) // "itemCount"
+QT_MOC_LITERAL(77, 9), // "findOrder"
+QT_MOC_LITERAL(87, 14), // "addItemToOrder"
+QT_MOC_LITERAL(102, 8), // "itemName"
+QT_MOC_LITERAL(111, 9) // "itemCount"
 
     },
     "orderHelper\0getUUID\0\0createOrder\0"
     "orderID\0fridgeID\0supplierName\0"
-    "supplierEmail\0addItemToOrder\0itemName\0"
-    "itemCount"
+    "supplierEmail\0findOrder\0addItemToOrder\0"
+    "itemName\0itemCount"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,7 +56,7 @@ static const uint qt_meta_data_orderHelper[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -63,14 +64,16 @@ static const uint qt_meta_data_orderHelper[] = {
        0,       // signalCount
 
  // methods: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   32,    2, 0x02,    1 /* Public */,
-       3,    4,   33,    2, 0x02,    2 /* Public */,
-       8,    3,   42,    2, 0x02,    7 /* Public */,
+       1,    0,   38,    2, 0x02,    1 /* Public */,
+       3,    4,   39,    2, 0x02,    2 /* Public */,
+       8,    1,   48,    2, 0x02,    7 /* Public */,
+       9,    3,   51,    2, 0x02,    9 /* Public */,
 
  // methods: parameters
     QMetaType::QString,
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,    4,    5,    6,    7,
-    QMetaType::Int, QMetaType::QString, QMetaType::QString, QMetaType::QString,    4,    9,   10,
+    QMetaType::QString, QMetaType::QString,    4,
+    QMetaType::Int, QMetaType::QString, QMetaType::QString, QMetaType::QString,    4,   10,   11,
 
        0        // eod
 };
@@ -84,7 +87,9 @@ void orderHelper::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 0: { QString _r = _t->getUUID();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
         case 1: _t->createOrder((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4]))); break;
-        case 2: { int _r = _t->addItemToOrder((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])));
+        case 2: { QString _r = _t->findOrder((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
+        case 3: { int _r = _t->addItemToOrder((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
@@ -100,7 +105,7 @@ const QMetaObject orderHelper::staticMetaObject = { {
 qt_incomplete_metaTypeArray<qt_meta_stringdata_orderHelper_t
 , QtPrivate::TypeAndForceComplete<orderHelper, std::true_type>
 
-, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>
+, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>
 
 >,
     nullptr
@@ -126,13 +131,13 @@ int orderHelper::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }

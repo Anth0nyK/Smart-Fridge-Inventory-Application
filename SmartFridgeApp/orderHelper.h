@@ -89,8 +89,59 @@ public:
         }
 
 
+        query.prepare("INSERT INTO deliver (orderID) VALUES (?)");
+        query.addBindValue(orderID);
+
+
+        if (!query.exec()){
+             qDebug("Create order, deliver Action failed");
+        }
+
         }
     }
+
+
+    Q_INVOKABLE QString findOrder(QString orderID){
+        {
+        QSqlDatabase::removeDatabase("connectionoh");
+        QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL","connectionoh");
+        db.setHostName("localhost");
+        db.setPort(3306);
+        db.setUserName("root");
+        db.setPassword("admin");
+        db.setDatabaseName("sf");
+        db.open();
+
+        QSqlQuery query(db);
+
+        qDebug() << "orderID: " + orderID;
+
+        //query.prepare("UPDATE uawe SET Username = ? WHERE UserID = ?");
+        //query.prepare("SELECT orderID FROM orders WHERE fridgeID = ? and orderID = ?");
+        //SELECT fridgeID FROM sf.orders WHERE orderID = "02453bf8-b891-4aa4-a44e-957da2d05cbf"
+        query.prepare("SELECT fridgeID FROM sf.orders WHERE orderID = ? and completed != 1");
+        query.addBindValue(orderID);
+
+
+        if (!query.exec()){
+             qDebug("find order Action failed");
+             return "error";
+        }
+
+
+        QString theFridgeID = "";
+
+        while (query.next()) {
+              theFridgeID = query.value(0).toString();
+        }
+
+        qDebug() << "" + theFridgeID;
+
+
+        return theFridgeID;
+    }
+    }
+
 
     Q_INVOKABLE int addItemToOrder(QString orderID, QString itemName, QString itemCount){
         {
@@ -118,15 +169,46 @@ public:
 
             QSqlQuery query(db);
 
+            //get image
+            query.prepare("SELECT itemPic FROM inventory WHERE itemName = ?");
+            query.addBindValue(itemName);
+
+
+            if (!query.exec()){
+                 qDebug("find itemPic in order Action failed");
+                 return 0;
+            }
+
+
+            QString theImage = "";
+
+            while (query.next()) {
+                  theImage = query.value(0).toString();
+            }
+
+
+
             //query.prepare("UPDATE uawe SET Username = ? WHERE UserID = ?");
-            query.prepare("INSERT INTO orderdata (orderID, itemName, itemCount) VALUES (?,?,?)");
+            query.prepare("INSERT INTO orderdata (orderID, itemName, itemCount, image) VALUES (?,?,?,?)");
             query.addBindValue(orderID);
             query.addBindValue(itemName);
             query.addBindValue(count);
+            query.addBindValue(theImage);
 
 
             if (!query.exec()){
                  qDebug("add item to order Action failed");
+                 return 0;
+            }
+
+            query.prepare("INSERT INTO delivereditems (orderID, itemName,needed,image) VALUES (?,?,?,?)");
+            query.addBindValue(orderID);
+            query.addBindValue(itemName);
+            query.addBindValue(count);
+            query.addBindValue(theImage);
+
+            if (!query.exec()){
+                 qDebug("add item to delivereditems Action failed");
                  return 0;
             }
 

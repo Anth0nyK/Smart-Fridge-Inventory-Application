@@ -40,11 +40,18 @@ Page {
 
     function updateItemInfo(){
         if(itemnameField.text != "" && supplierField.text != "" && emailField.text != ""){
-            itemtool.updateItemInfo(itemnameField.text, supplierField.text, alertField.value,reorderField.value, emailField.text, itemID)
-            message.text = "Updated the item info"
-            let action = "Item info of item: " + itemtool.getItemname(itemID) + "was updated"
-            theActivityLogHelper.createLog(action, theProfileHelper.getUsername(currentUserID), currentfridgeID)
+            let x = 0
+            x = itemtool.updateItemInfo(itemnameField.text, supplierField.text, alertField.value, reorderField.value, emailField.text, amountField.value, alertCheck.checked, reorderCheck.checked,itemID)
+            if(x == 1){
+                message.text = "Updated the item info"
+                let action = "Item info of item: " + itemtool.getItemname(itemID) + " was updated"
+                theActivityLogHelper.createLog(action, theProfileHelper.getUsername(currentUserID), currentfridgeID)
+            }else{
+                message.text = "No changes were made"
+            }
 
+
+//int reorderAmount, int alertOn, int reorderOn
         }
 
     }
@@ -59,6 +66,7 @@ Page {
             button1.visible = false
             delete1.visible = false
             delete2.visible = false
+            backbutton.visible = false
         }
         if(x == 2){
             message.text = "You need to clear out this item from the fridge first"
@@ -316,6 +324,33 @@ Page {
             }
         }
 
+        Text {
+            id: reordertext1
+            x: 384
+            y: 455
+            text: "Amount:"
+            font.pixelSize: 25
+            font.bold: false
+        }
+
+        CheckBox {
+            id: alertCheck
+            x: 39
+            y: 423
+            width: 15
+            height: 19
+            checked: itemtool.getAlertOn(itemID)
+        }
+
+        CheckBox {
+            id: reorderCheck
+            x: 39
+            y: 463
+            width: 15
+            height: 19
+            checked: itemtool.getReorderOn(itemID)
+        }
+
 /*
 
         C1.TableView {
@@ -436,6 +471,26 @@ Page {
             font.pixelSize: 12
         }
 
+    }
+
+    Rectangle {
+        id: rectangle7
+        x: 484
+        y: 456
+        width: 72
+        height: 34
+        color: "#ffffff"
+        radius: 5
+        border.width: 2
+        SpinBox {
+            id: amountField
+            x: 8
+            y: 8
+            width: 56
+            height: 19
+            value: itemtool.getReorderAmount(itemID)
+            from: 0
+        }
     }
 
 

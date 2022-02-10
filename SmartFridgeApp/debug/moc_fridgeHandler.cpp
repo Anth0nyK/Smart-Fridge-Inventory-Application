@@ -22,20 +22,26 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_fridgeHandler_t {
-    const uint offsetsAndSize[8];
-    char stringdata0[38];
+    const uint offsetsAndSize[16];
+    char stringdata0[100];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_fridgeHandler_t, stringdata0) + ofs), len 
 static const qt_meta_stringdata_fridgeHandler_t qt_meta_stringdata_fridgeHandler = {
     {
 QT_MOC_LITERAL(0, 13), // "fridgeHandler"
-QT_MOC_LITERAL(14, 13), // "getDoorStatus"
-QT_MOC_LITERAL(28, 0), // ""
-QT_MOC_LITERAL(29, 8) // "fridgeID"
+QT_MOC_LITERAL(14, 21), // "updateFrontDoorStatus"
+QT_MOC_LITERAL(36, 0), // ""
+QT_MOC_LITERAL(37, 8), // "fridgeID"
+QT_MOC_LITERAL(46, 9), // "frontDoor"
+QT_MOC_LITERAL(56, 20), // "updateRearDoorStatus"
+QT_MOC_LITERAL(77, 8), // "rearDorr"
+QT_MOC_LITERAL(86, 13) // "getDoorStatus"
 
     },
-    "fridgeHandler\0getDoorStatus\0\0fridgeID"
+    "fridgeHandler\0updateFrontDoorStatus\0"
+    "\0fridgeID\0frontDoor\0updateRearDoorStatus\0"
+    "rearDorr\0getDoorStatus"
 };
 #undef QT_MOC_LITERAL
 
@@ -45,7 +51,7 @@ static const uint qt_meta_data_fridgeHandler[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -53,9 +59,13 @@ static const uint qt_meta_data_fridgeHandler[] = {
        0,       // signalCount
 
  // methods: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   20,    2, 0x02,    1 /* Public */,
+       1,    2,   32,    2, 0x02,    1 /* Public */,
+       5,    2,   37,    2, 0x02,    4 /* Public */,
+       7,    1,   42,    2, 0x02,    7 /* Public */,
 
  // methods: parameters
+    QMetaType::QString, QMetaType::QString, QMetaType::QString,    3,    4,
+    QMetaType::QString, QMetaType::QString, QMetaType::QString,    3,    6,
     QMetaType::QString, QMetaType::QString,    3,
 
        0        // eod
@@ -67,7 +77,11 @@ void fridgeHandler::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         auto *_t = static_cast<fridgeHandler *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: { QString _r = _t->getDoorStatus((*reinterpret_cast< QString(*)>(_a[1])));
+        case 0: { QString _r = _t->updateFrontDoorStatus((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])));
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
+        case 1: { QString _r = _t->updateRearDoorStatus((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])));
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
+        case 2: { QString _r = _t->getDoorStatus((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
@@ -83,7 +97,7 @@ const QMetaObject fridgeHandler::staticMetaObject = { {
 qt_incomplete_metaTypeArray<qt_meta_stringdata_fridgeHandler_t
 , QtPrivate::TypeAndForceComplete<fridgeHandler, std::true_type>
 
-, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>
+, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>
 
 >,
     nullptr
@@ -109,13 +123,13 @@ int fridgeHandler::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 3)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 3;
     }
     return _id;
 }

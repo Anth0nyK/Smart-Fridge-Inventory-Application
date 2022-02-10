@@ -3,6 +3,7 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 import login 1.0
 import profileinfo 1.0
+import permissionHelper 1.0
 
 Window {
     width: 700
@@ -18,6 +19,7 @@ Window {
     property string fridgeID
     property string username
     property int accountType
+    property int isAdmin
 
     LoginClass {
         id: logintool
@@ -25,6 +27,10 @@ Window {
 
     ProfileHelper{
         id: profiletool
+    }
+
+    PermissionHelper{
+        id: thePermissionHelper
     }
 
     function addPin() {
@@ -47,8 +53,9 @@ Window {
             fridgeID = profiletool.getFridgeID(userID)
             username = profiletool.getUsername(userID)
             accountType = profiletool.getAccountType(userID)
+            isAdmin = thePermissionHelper.checkIfAdmin(userID)
             var component = Qt.createComponent("main.qml");
-            var win = component.createObject(loginscreen,{currentUserID: userID,currentUserName: username, fridgeID: fridgeID, accountType: accountType});
+            var win = component.createObject(loginscreen,{currentUserID: userID,currentUserName: username, fridgeID: fridgeID, accountType: accountType, isAdmin: isAdmin});
             win.show();
             loginscreen.hide();
         }

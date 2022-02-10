@@ -9,6 +9,9 @@ SOURCES += \
         inventorymodel.cpp \
         itemmodel.cpp \
         main.cpp \
+        noticemodel.cpp \
+        order2model.cpp \
+        orderdelivermodel.cpp \
         orderdetailmodel.cpp \
         orderitemsmodel.cpp \
         ordermodel.cpp \
@@ -37,13 +40,18 @@ HEADERS += \
     itemHelper.h \
     itemmodel.h \
     login.h \
+    noticeHelper.h \
+    noticemodel.h \
+    order2model.h \
     orderHelper.h \
+    orderdelivermodel.h \
     orderdetailmodel.h \
     orderitemsmodel.h \
     ordermodel.h \
     permissionHelper.h \
     permissionmodel.h \
     profileinfo.h \
+    reorderHelper.h \
     restaurantInfoHelper.h \
     suppliermodel.h \
     usersManagementHelper.h \

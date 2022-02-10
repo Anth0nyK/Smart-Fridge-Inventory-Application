@@ -1,15 +1,96 @@
-import QtQuick 2.4
+import QtQuick 2.14
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
+import iteminfo 1.0
+import activityLogHelper 1.0
+import profileinfo 1.0
 
+import usersManagementHelper 1.0
 
 Page {
-    property string userID
-    property string userImage
-    property StackView theStack: StackView.view
+    id: page
+    //property StackView theStack: StackView.view
+    property string currentUserID
+    property string currentfridgeID
 
+    //property string thatUserID
     width: 780
     height: 585
+
+    ProfileHelper{
+        id: theProfileHelper
+    }
+
+    ItemHelper{
+        id: itemtool
+    }
+
+    ActivityLogHelper{
+        id: theActivityLogHelper
+    }
+
+    UsersManagementHelper{
+        id: theUsersManagementHelper
+    }
+
+    function changeItemPic(){
+        if(pictureLink.text != "")
+        {
+            image.source = pictureLink.text
+            image.visible = true
+            image2.visible = false
+            //itemtool.changePicture(itemID,pictureLink.text)
+            //pictureLink.text = ""
+            //message.text = "Updated the item picture"
+            //let action = "Profile picture of item: " + itemtool.getItemname(itemID) + " was updated"
+            //theActivityLogHelper.createLog(action, theProfileHelper.getUsername(currentUserID), currentfridgeID)
+        }
+    }
+
+    function deleteAccount(){
+        let succeed = 0
+        succeed = theUsersManagementHelper.deleteAccount(thatUserID)
+        if(succeed == 1){
+            message.text = "Account deleted"
+            button2.visible = false
+            button1.visible = false
+            button3.visible = false
+            button4.visible = false
+        }
+        if(succeed == 2){
+            message.text = "Cannot delete an admin account"
+        }
+    }
+
+    function updateItemInfo(){
+        if(nameField.text != ""){
+            //itemtool.updateItemInfo(nameField.text, phoneField.text, alertField.text,reorderField.text, emailField.text, itemID)
+            let suceed = 0
+            suceed = theUsersManagementHelper.updateInfo(image.source, nameField.text, emailField.text, phoneField.text, currentUserID)
+            if(suceed == 1){
+                message.text = "Updated the user info"
+                //image.source = theUsersManagementHelper.getPic(thatUserID)
+
+                let action = "User info of user: " + theProfileHelper.getUsername(currentUserID) + " was updated"
+                theActivityLogHelper.createLog(action, theProfileHelper.getUsername(currentUserID), currentfridgeID)
+
+            }
+        }
+    }
+
+    function updatePW(){
+        if(newpwField.text == newpw2Field.text){
+            let succeed = 0
+            succeed = theUsersManagementHelper.updatePW(oldpwField.text, newpwField.text, currentUserID)
+            if(succeed == 1){
+                message.text = "Updated the user password"
+            }else{
+                message.text = "Wrong password"
+            }
+        }else{
+            message.text = "Passwords do not match"
+        }
+    }
 
     Rectangle {
 
@@ -37,174 +118,256 @@ Page {
         }
 
         Text {
-            id: element
-                x: 213
-                y: 258
-                width: 60
-                height: 21
-                text: qsTr("Username:")
-                font.bold: true
-                font.pixelSize: 16
+            id: itemnameText
+            x: 16
+            y: 20
+            text: qsTr("Profile")
+            //text: qsTr("Management > Users > " + theProfileHelper.getUsername(thatUserID))
+            font.pixelSize: 25
+            font.bold: false
+        }
+
+        Image {
+            id: image
+            x: 16
+            y: 81
+            visible: false
+            width: 166
+            height: 166
+            source: theUsersManagementHelper.getPic(currentUserID)
+            fillMode: Image.PreserveAspectFit
+
+        }
+        Image {
+            id: image2
+            x: 16
+            y: 81
+            visible: true
+            width: 166
+            height: 166
+            source: theUsersManagementHelper.getPic(currentUserID)
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Button {
+            id: button
+            x: 59
+            y: 293
+            text: qsTr("Test a photo")
+            enabled: true
+            hoverEnabled: false
+            font.bold: true
+            flat: false
+            background: Rectangle {
+                //radius: roundButton.radius
+                color: "#43b05c"
             }
-
-            TextField {
-                id: usernameField
-                x: 311
-                y: 254
-                width: 93
-                height: 27
+            onClicked: {
+                changeItemPic()
             }
+        }
 
-            Button {
-                id: saveUserID
-                x: 485
-                y: 254
-                enabled: usernameField.length > 0
-                text: qsTr("SAVE")
-                font.bold: true
-                background: Rectangle {
-                    radius: 5
-                    color: "grey"
-                }
-                onClicked: {
-                    profilehelper.changeUsername(userID,usernameField.text)
-                    usernameField.text = "";
-                    message.text = "Updated, please login again"
-                }
+        Text {
+            id: itemnameText1
+            x: 188
+            y: 81
+            text: "Name:"
+            font.pixelSize: 25
+            font.bold: false
+        }
+
+        Text {
+            id: suppliertext
+            x: 188
+            y: 195
+            text: "Phone number:"
+            font.pixelSize: 25
+            font.bold: false
+        }
+
+        Text {
+            id: supplieremailField
+            x: 188
+            y: 141
+            text: "Email address:"
+            font.pixelSize: 25
+            font.bold: false
+        }
+
+        Rectangle {
+            id: rectangle1
+            x: 265
+            y: 81
+            width: 162
+            height: 34
+            color: "#ffffff"
+            radius: 5
+            border.width: 2
+
+            TextInput {
+                id: nameField
+                x: 10
+                y: 8
+                width: 146
+                height: 20
+                text: qsTr(theProfileHelper.getUsername(currentUserID))
+                font.pixelSize: 12
             }
+        }
 
+        Rectangle {
+            id: rectangle2
+            x: 362
+            y: 194
+            width: 203
+            height: 34
+            color: "#ffffff"
+            radius: 5
+            border.width: 2
 
-            Text {
-                id: element1
-                x: 234
-                y: 215
-                text: qsTr("YourID: " + userID)
-                font.bold: true
-                font.pixelSize: 16
-            }
-
-            Text {
-                id: element2
-                x: 294
-                y: 113
-                text: qsTr("Your Profile")
-                font.pixelSize: 25
-            }
-
-            Image {
-                id: image
-                x: 271
-                y: 101
-                width: 100
-                height: 100
-                fillMode: Image.PreserveAspectFit
-                source: userImage
-            }
-
-            Text {
-                id: element3
-                x: 173
-                y: 303
-                width: 121
-                height: 21
-                text: qsTr("Profile picture:")
-                font.pixelSize: 16
-                font.bold: true
-            }
-
-            TextField {
-                id: pictureField
-                x: 311
-                y: 300
-                width: 93
-                height: 27
-            }
-
-            Button {
-                id: savepicture
-                x: 485
-                y: 299
-                text: qsTr("SAVE")
-                enabled: pictureField.length > 0
-                background: Rectangle {
-                    color: "#808080"
-                    radius: 5
-                }
-                font.bold: true
-                onClicked: {
-                    profilehelper.changePicture(userID,pictureField.text)
-                    pictureField.text = ""
-                    message.text = "Updated, please login again"
-                }
-            }
-
-            Text {
-                id: element4
-                x: 213
-                y: 344
-                width: 81
-                height: 21
-                text: qsTr("Password:")
-                font.pixelSize: 16
-                font.bold: true
-            }
-
-            TextField {
-                id: pwField
-                x: 311
-                y: 341
-                width: 93
-                height: 27
-            }
-
-            Button {
-                id: savepw
-                x: 485
-                y: 340
-                text: qsTr("SAVE")
-                enabled: pwField.length > 0
-                background: Rectangle {
-                    color: "#808080"
-                    radius: 5
-                }
-                font.bold: true
-                onClicked: {
-                    profilehelper.changePW(userID,pwField.text)
-                    pwField.text = ""
-                    message.text = "Updated, please login again"
-                }
-            }
-
-            Text {
-                id: element5
-                x: 410
-                y: 303
-                width: 60
-                height: 21
-                text: qsTr("(link)")
-                font.pixelSize: 16
-                font.bold: true
-            }
-
-            Text {
-                id: message
-                x: 241
-                y: 417
-                width: 159
-                height: 23
-                font.pixelSize: 20
-                text:""
-            }
-
-            Button {
-                id: backbutton
+            TextInput {
+                id: phoneField
                 x: 8
-                y: 25
-                text: qsTr("back")
-                onClicked: {
-                    thestackView.pop()
-                }
+                y: 8
+                width: 187
+                height: 20
+                text: qsTr(theUsersManagementHelper.getTel(currentUserID))
+                font.pixelSize: 12
             }
+        }
+
+        Button {
+            id: button1
+            x: 336
+            y: 427
+            text: qsTr("Change password")
+            enabled: true
+            hoverEnabled: false
+            background: Rectangle {
+                color: "#9e0000"
+                //radius: roundButton.radius
+            }
+            flat: false
+            font.bold: true
+            onClicked: {
+                updatePW()
+            }
+        }
+
+
+        //QString itemName, QString supplierName, QString alertWhen, QString reorderWhen, QString supplierEmail
+        Rectangle {
+            id: rectangle5
+            x: 16
+            y: 253
+            width: 166
+            height: 34
+            color: "#ffffff"
+            radius: 5
+            border.width: 2
+            TextInput {
+                id: pictureLink
+                x: 6
+                y: 7
+                width: 152
+                height: 20
+                text: ""
+                font.pixelSize: 12
+                horizontalAlignment: Text.AlignLeft
+            }
+        }
+
+        Text {
+            id: message
+            x: 263
+            y: 539
+            width: 257
+            height: 28
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 21
+            font.bold: false
+        }
+
+        Text {
+            id: suppliertext1
+            x: 188
+            y: 293
+            text: "Old password:"
+            font.pixelSize: 25
+            font.bold: false
+        }
+
+        Text {
+            id: suppliertext2
+            x: 188
+            y: 333
+            text: "New password:"
+            font.pixelSize: 25
+            font.bold: false
+        }
+
+        Text {
+            id: suppliertext3
+            x: 188
+            y: 373
+            text: "Confirm password:"
+            font.pixelSize: 25
+            font.bold: false
+        }
+
+        Button {
+            id: button2
+            x: 349
+            y: 244
+            text: qsTr("Save changes")
+            flat: false
+            enabled: true
+            hoverEnabled: false
+            background: Rectangle {
+                color: "#9e0000"
+            }
+            font.bold: true
+            onClicked: {
+                updateItemInfo()
+            }
+        }
+
+        Button {
+            id: button4
+            x: 343
+            y: 509
+            visible: false
+            text: qsTr("Confirm delete")
+            hoverEnabled: false
+            enabled: true
+            flat: false
+            font.bold: true
+            background: Rectangle {
+                color: "#9e0000"
+            }
+            onClicked: {
+                deleteAccount()
+            }
+        }
+
+/*
+
+        C1.TableView {
+            anchors.fill: parent
+            anchors.leftMargin: 0
+            anchors.topMargin: 296
+            columnSpacing: 1
+            rowSpacing: 1
+            clip: true
+
+            //model: TableModel {}
+            C1.TableViewColumn { role: "itemName" ; title: "name"}
+            model: InventoryModel{
+                id: theinventorymodel;
+                fridgeID: "1"
+            }
+        }
+*/
 
 /*
             Button {
@@ -221,6 +384,87 @@ Page {
 
     }
 
+    Rectangle {
+        id: rectangle6
+        x: 363
+        y: 143
+        width: 203
+        height: 34
+        color: "#ffffff"
+        radius: 5
+        border.width: 2
+
+        TextInput {
+            id: emailField
+            x: 8
+            y: 8
+            width: 187
+            height: 20
+            text: qsTr(theUsersManagementHelper.getEmail(currentUserID))
+            font.pixelSize: 12
+        }
+    }
+
+    Rectangle {
+        id: rectangle7
+        x: 397
+        y: 374
+        width: 203
+        height: 34
+        color: "#ffffff"
+        radius: 5
+        border.width: 2
+        TextInput {
+            id: newpw2Field
+            x: 8
+            y: 8
+            width: 187
+            height: 20
+            font.pixelSize: 12
+            echoMode: TextInput.Password
+        }
+    }
+
+    Rectangle {
+        id: rectangle8
+        x: 397
+        y: 334
+        width: 203
+        height: 34
+        color: "#ffffff"
+        radius: 5
+        border.width: 2
+        TextInput {
+            id: newpwField
+            x: 8
+            y: 8
+            width: 187
+            height: 20
+            font.pixelSize: 12
+            echoMode: TextInput.Password
+        }
+    }
+
+    Rectangle {
+        id: rectangle9
+        x: 397
+        y: 294
+        width: 203
+        height: 34
+        color: "#ffffff"
+        radius: 5
+        border.width: 2
+        TextInput {
+            id: oldpwField
+            x: 8
+            y: 8
+            width: 187
+            height: 20
+            font.pixelSize: 12
+            echoMode: TextInput.Password
+        }
+    }
+
 
 }
 
@@ -228,7 +472,9 @@ Page {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.75}D{i:2}D{i:3}D{i:4}D{i:5}D{i:7}D{i:8}D{i:9}D{i:10}D{i:11}
-D{i:12}D{i:14}D{i:15}D{i:16}D{i:18}D{i:19}D{i:20}D{i:1}
+    D{i:0;formeditorZoom:0.75}D{i:1}D{i:2}D{i:3}D{i:4}D{i:6}D{i:7}D{i:8}D{i:9}D{i:10}
+D{i:12}D{i:13}D{i:14}D{i:16}D{i:15}D{i:18}D{i:17}D{i:19}D{i:22}D{i:21}D{i:23}D{i:24}
+D{i:25}D{i:26}D{i:27}D{i:29}D{i:31}D{i:5}D{i:34}D{i:33}D{i:36}D{i:35}D{i:38}D{i:37}
+D{i:40}D{i:39}
 }
 ##^##*/

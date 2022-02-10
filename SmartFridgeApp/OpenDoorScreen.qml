@@ -40,6 +40,7 @@ Page {
         x = thePermissionHelper.checkOpenPermission(userID)
         if(x == 1){
             if(theFridgeHandler.getDoorStatus(fridgeID) == "OK"){
+                theFridgeHandler.updateFrontDoorStatus(fridgeID,"1")
                 message.text = ""
 
                 let action = "Front door unlocked"
@@ -56,6 +57,17 @@ Page {
         }
     }
 
+    function lockFridge(){
+        if(theFridgeHandler.updateFrontDoorStatus(fridgeID,"0")){
+            message.text = "Locked"
+
+
+            let action = "Front door locked"
+            theActivityLogHelper.createLog(action, theProfileHelper.getUsername(userID), fridgeID)
+
+            //thestackView.push(theUnlockedScreen, {fridgeID: fridgeID, userID: userID})
+        }
+    }
 
 
     Rectangle {
@@ -121,7 +133,7 @@ Page {
 
         Image {
             id: borderImage
-            x: 290
+            x: 150
             y: 193
             width: 200
             height: 200
@@ -142,11 +154,43 @@ Page {
 
         }
 
+        Image {
+            id: borderImage2
+            x: 450
+            y: 193
+            width: 200
+            height: 200
+            source: "images/lockedBig.png"
+            fillMode: Image.PreserveAspectFit
+
+            MouseArea {
+                anchors.fill: parent
+                anchors.rightMargin: 0
+                anchors.bottomMargin: 0
+                anchors.leftMargin: 0
+                anchors.topMargin: 0
+                onClicked: {
+                    //console.info("image clicked!3")
+                    lockFridge()
+                }
+            }
+
+        }
+
         Text {
             id: itemnameText1
-            x: 352
-            y: 383
+            x: 212
+            y: 385
             text: "Unlock"
+            font.pixelSize: 25
+            font.bold: false
+        }
+
+        Text {
+            id: itemnameText2
+            x: 525
+            y: 385
+            text: "Lock"
             font.pixelSize: 25
             font.bold: false
         }

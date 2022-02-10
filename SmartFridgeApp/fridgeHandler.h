@@ -13,6 +13,76 @@ class fridgeHandler : public QObject
 public:
     explicit fridgeHandler (QObject* parent = 0 ) : QObject(parent) {}
 
+    Q_INVOKABLE QString updateFrontDoorStatus(QString fridgeID, QString frontDoor){
+        {
+
+        QString status = NULL;
+        QString front = NULL;
+        QString rear = NULL;
+
+        QSqlDatabase::removeDatabase("connectionFH");
+        QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL","connectionFH");
+        db.setHostName("localhost");
+        db.setPort(3306);
+        db.setUserName("root");
+        db.setPassword("admin");
+        db.setDatabaseName("sf");
+
+        db.open();
+
+        QSqlQuery query(db);
+
+        query.prepare("UPDATE `sf`.`fridge` SET `frontDoorOpen` = ? WHERE (`fridgeID` = ?);");
+        query.addBindValue(frontDoor);
+        query.addBindValue(fridgeID);
+
+        if (!query.exec()){
+             qDebug("update front door status Action failed");
+             return "Failed";
+        }
+
+
+        return "OK";
+
+
+        }
+    }
+
+    Q_INVOKABLE QString updateRearDoorStatus(QString fridgeID, QString rearDorr){
+        {
+
+        QString status = NULL;
+        QString front = NULL;
+        QString rear = NULL;
+
+        QSqlDatabase::removeDatabase("connectionFH");
+        QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL","connectionFH");
+        db.setHostName("localhost");
+        db.setPort(3306);
+        db.setUserName("root");
+        db.setPassword("admin");
+        db.setDatabaseName("sf");
+
+        db.open();
+
+        QSqlQuery query(db);
+
+        query.prepare("UPDATE `sf`.`fridge` SET `rearDoorOpen` = ? WHERE (`fridgeID` = ?);");
+        query.addBindValue(rearDorr);
+        query.addBindValue(fridgeID);
+
+        if (!query.exec()){
+             qDebug("update front door status Action failed");
+             return "Failed";
+        }
+
+
+        return "OK";
+
+
+        }
+    }
+
     Q_INVOKABLE QString getDoorStatus(QString fridgeID){
         {
 
@@ -62,7 +132,7 @@ public:
             return "OK";
         }
         else{
-            return "";
+            return "NO";
         }
 
 

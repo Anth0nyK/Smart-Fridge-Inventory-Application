@@ -166,7 +166,7 @@ Q_INVOKABLE void orderModel::updateorderModel(){
 
         QSqlQuery query(QSqlDatabase::database("connection3"));
 
-        query.prepare("SELECT orders.orderID, orders.supplierName, orders.supplierEmail, orders.dateTime, orders.completed FROM orders WHERE orders.fridgeID = ? ORDER BY orders.dateTime DESC");
+        query.prepare("SELECT orders.orderID, orders.supplierName, orders.supplierEmail, orders.dateTime, orders.completed FROM orders WHERE orders.fridgeID = ? AND orders.completed = 0 ORDER BY orders.dateTime DESC");
         query.addBindValue(theorderID);
 
 

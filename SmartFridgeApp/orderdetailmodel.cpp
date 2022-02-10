@@ -52,7 +52,8 @@ Q_INVOKABLE void orderdetailModel::updateorderdetailModel(){
         QSqlQuery query(QSqlDatabase::database("connection5"));
 
         //query.prepare("SELECT orders.orderID, orders.supplierName, orders.supplierEmail, orders.dateTime, orders.completed FROM orders WHERE orders.fridgeID = ? ORDER BY orders.dateTime DESC");
-        query.prepare("SELECT orderdata.itemName, orderdata.itemCount FROM orderdata WHERE orderdata.orderID = ?");
+        //query.prepare("SELECT delivereditems.itemName, delivereditems.needed, delivereditems.image FROM delivereditems WHERE delivereditems.orderID = ?");
+        query.prepare("SELECT orderdata.itemName, orderdata.itemCount, orderdata.image FROM orderdata WHERE orderdata.orderID = ?");
         query.addBindValue(theorderID);
 
 

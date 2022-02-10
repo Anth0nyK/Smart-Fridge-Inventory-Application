@@ -216,9 +216,9 @@ Page {
 
                         CheckBox {
                             id: checkBoxCanView
-                            x: 50
+                            x: 20
                             y: 29
-                            text: qsTr("Can view")
+                            text: qsTr("Can view inv")
                             font.pointSize: 11
                             checked: model.canView
                         }
@@ -235,10 +235,10 @@ Page {
                         }*/
                         CheckBox {
                             id: checkBoxCanOpen
-                            x: 100
+                            x: 60
                             y: 29
                             font.pointSize: 11
-                            text: qsTr("Can open")
+                            text: qsTr("Can open door")
 
                             checked: model.canOpen
                         }
@@ -254,7 +254,7 @@ Page {
                         }*/
                         CheckBox {
                             id: checkBoxCanHistory
-                            x: 150
+                            x: 100
                             y: 29
                             font.pointSize: 11
                             text: qsTr("Can view history")
@@ -273,7 +273,7 @@ Page {
                         }*/
                         CheckBox {
                             id: checkBoxCanOrder
-                            x: 200
+                            x: 150
                             y: 29
                             font.pointSize: 11
                             text: qsTr("Can view orders")

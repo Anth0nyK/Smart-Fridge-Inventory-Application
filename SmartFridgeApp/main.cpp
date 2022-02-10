@@ -19,7 +19,10 @@
 #include <restaurantInfoHelper.h>
 #include <usersmodel.h>
 #include <usersManagementHelper.h>
-
+#include <noticemodel.h>
+#include <noticeHelper.h>
+#include <orderdelivermodel.h>
+#include <order2model.h>
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -35,6 +38,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<fridgeHandler>("fridgeHandler",1,0,"FridgeHandler");
     qmlRegisterType<orderHelper>("orderHelper",1,0,"OrderHelper");
     qmlRegisterType<orderModel>("ordermodel",1,0,"OrderModel");
+    qmlRegisterType<order2Model>("order2model",1,0,"Order2Model");
     qmlRegisterType<supplierModel>("suppliermodel",1,0,"SupplierModel");
     qmlRegisterType<orderitemsmodel>("orderitemsmodel",1,0,"OrderItemsModel");
     qmlRegisterType<orderdetailModel>("orderdetailmodel",1,0,"OrderdetailModel");
@@ -45,6 +49,9 @@ int main(int argc, char *argv[])
     qmlRegisterType<restaurantinfoHelper>("restaurantinfoHelper",1,0,"RestaurantinfoHelper");
     qmlRegisterType<usersmodel>("usersmodel",1,0,"UsersModel");
     qmlRegisterType<usersManagementHelper>("usersManagementHelper",1,0,"UsersManagementHelper");
+    qmlRegisterType<noticeModel>("noticeModel",1,0,"NoticeModel");
+    qmlRegisterType<noticeHelper>("noticeHelper",1,0,"NoticeHelper");
+    qmlRegisterType<orderDeliverModel>("orderDeliverModel",1,0,"OrderDeliverModel");
 
     //qmlRegisterType<TableModel>("tablemodel",1,0,"TableModel");
 

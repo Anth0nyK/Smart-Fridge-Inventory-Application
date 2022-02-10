@@ -159,6 +159,18 @@ public:
              return 0;
         }
 
+        //INSERT INTO `sf`.`notice` (`fridgeID`, `haveNotice`, `userID`) VALUES ('1', '1', '1');
+        query.prepare("INSERT INTO `sf`.`notice` (`fridgeID`, `userID`) VALUES (?, ?);");
+        //query.prepare("SELECT name FROM restaurant WHERE fridgeID = ?");
+
+        query.addBindValue(fridgeID);
+        query.addBindValue(userID);
+
+        if (!query.exec()){
+             qDebug("create account notice Action failed");
+             return 0;
+        }
+
 /*
         while (query.next()) {
               name = query.value(0).toString();
@@ -220,6 +232,16 @@ public:
 
         if (!query.exec()){
              qDebug("delete account permission Action failed");
+             return 0;
+        }
+
+
+        query.prepare("DELETE FROM `sf`.`notice` WHERE (`userID` = ?);");
+        //query.prepare("SELECT name FROM restaurant WHERE fridgeID = ?");
+        query.addBindValue(userID);
+
+        if (!query.exec()){
+             qDebug("delete account notice Action failed");
              return 0;
         }
 

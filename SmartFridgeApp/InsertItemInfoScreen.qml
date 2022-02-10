@@ -30,7 +30,10 @@ Page {
     function insertItem(){
         if(amountInput.value > 0 && expiryInput.text != ""){
             itemtool.insertItem(itemID, currentfridgeID, amountInput.value, expiryInput.text)
-            message = "Inserted " + amountInput.value + " into the fridge"
+            message.text = "Inserted " + amountInput.value + " into the fridge"
+            quantity2.text = qsTr("Quantity: " + itemtool.getItemCount(itemID))
+            quantity1.visible = false
+            quantity2.visible = true
             let action = "Inserted " + itemtool.getItemname(itemID) + " x" + amountInput.value
             theActivityLogHelper.createLog(action, theProfileHelper.getUsername(userID), currentfridgeID)
         }
@@ -70,6 +73,8 @@ Page {
             font.bold: true
             onClicked: {
                 message.text = ""
+                quantity1.visible = true
+                quantity2.visible = false
                 thestackView.pop()
                 theinventorymodel.updateinventoryModel()
                 theinventorymodel2.updateinventoryModel()
@@ -193,7 +198,7 @@ Page {
         }
 
         Text {
-            id: itemnameText2
+            id: quantity1
             x: 290
             y: 388
             text: qsTr("Quantity: " + itemtool.getItemCount(itemID))
@@ -224,6 +229,16 @@ Page {
             x: 258
             y: 468
             text: "Expiry date"
+            font.pixelSize: 25
+            font.bold: false
+        }
+
+        Text {
+            id: quantity2
+            x: 291
+            y: 388
+            visible: false
+            text: qsTr("Quantity: " + itemtool.getItemCount(itemID))
             font.pixelSize: 25
             font.bold: false
         }

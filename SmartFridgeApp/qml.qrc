@@ -43,6 +43,12 @@
         <file>UsersManagementScreen.qml</file>
         <file>UsersManagementInfoScreen.qml</file>
         <file>CreateAccountScreen.qml</file>
-		<file>images/default.png</file>
+        <file>images/default.png</file>
+        <file>Notifications.qml</file>
+        <file>images/bell2.png</file>
+        <file>FridgeInventoryForShop.qml</file>
+        <file>UnlockedScreenForShop.qml</file>
+        <file>InsertItemScreenForShop.qml</file>
+        <file>InsertItemInfoScreenForShop.qml</file>
     </qresource>
 </RCC>
