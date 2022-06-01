@@ -4,7 +4,6 @@
 <p align="center">
  <img src="https://github.com/Anth0nyK/Smart-Fridge-Inventory-Application/blob/main/README_Images/1.jpeg" width="350" title="Home screen">
 </p>
----
 
 ## Description
 
