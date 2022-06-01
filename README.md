@@ -1,8 +1,9 @@
 # Smart Fridge Inventory Application
  A smart fridge inventory application for inventory management in restaurants
  
+<p align="center">
  <img src="https://github.com/Anth0nyK/Smart-Fridge-Inventory-Application/blob/main/README_Images/1.jpeg" width="350" title="Home screen">
-
+</p>
 ---
 
 ## Description
