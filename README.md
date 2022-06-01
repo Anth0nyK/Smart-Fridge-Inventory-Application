@@ -44,6 +44,7 @@ The user can unlock the fridge to insert items inside and specify the quantity a
 <img src="https://github.com/Anth0nyK/Smart-Fridge-Inventory-Application/blob/main/README_Images/9.jpeg" width="350" title="Inventory screen">
 </p>
 
+</br></br>
 
 The fridge inventory application has a notification page and an acitivity log page where the users can look at the notifications and the activitis history of the fridge. The applicaion also has a permission system which can allow the admin user to retrict the access of the users to some functions in the applicaions (Viewing the inventory, Putting & Taking items, Viewing history)
 
