@@ -16,7 +16,7 @@
 <br/>
 
 
-This project is a smart fridge inventory application built by using C++, Qt and MySQL. This application designed for restaurants to allow the staffs to to keep track on the items in their fridge. The application can help recording the insert dates & expiry dates of the items and alert the users if certain items are running low or going to be expired in the fridge.
+This project is a smart fridge inventory application built by using C++, Qt and MySQL. This application designed for restaurants to allow the staffs to to keep track on the items in their fridge. The main functionality of this application is to help recording the insert dates & expiry dates of the items and alert the users if certain items are running low or going to be expired in the fridge.
 
 <p align="center">
 <img src="https://github.com/Anth0nyK/Smart-Fridge-Inventory-Application/blob/main/README_Images/2.jpeg" width="350" title="Home screen">
